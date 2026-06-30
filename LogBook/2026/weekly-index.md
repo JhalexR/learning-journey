@@ -1,7 +1,7 @@
 # Semana 27
 
-## Domingo 29 Jun - Sábado 5 Jul
+&nbsp; ## Domingo 29 Jun - Sábado 5 Jul
 
-### Repositorios trabajados
+&ensp; ### Repositorios trabajados
 
-learning-journey
+&emsp; learning-journey
