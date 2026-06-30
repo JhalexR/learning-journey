@@ -1,0 +1,3 @@
+# 30/06/2026
+
+Aprendi sobre lineas de tiempo, formato mermaid para Markdowdn, y registro de actividades
