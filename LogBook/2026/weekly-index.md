@@ -5,11 +5,6 @@
   
 ### Repositorios trabajados
 
-</details>
-
-<details>
-<summary>Haz clic para expandir</summary>
-
 learning-journey
 
 </details>
