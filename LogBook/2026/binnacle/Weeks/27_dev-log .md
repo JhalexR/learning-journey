@@ -9,3 +9,15 @@
 + Registro de actividades
 
 </details>
+
+#### 01/07/2026
+
+<details>
+<summary>Haz clic para expandir</summary>
+
+##### Investigué sobre:
+
++ Sintaxis básica de Markdown
++ Uso de draw.io para diagramar
+
+</details>
