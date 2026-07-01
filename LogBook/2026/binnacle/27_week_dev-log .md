@@ -3,6 +3,9 @@
 <details>
 <summary>Haz clic para expandir</summary>
 
-Aprendi sobre lineas de tiempo, formato mermaid para Markdowdn, y registro de actividades
+### Investigué sobre:
++ Lineas de tiempo
++ Formato mermaid para Markdown
++ Registro de actividades
 
 </details>
