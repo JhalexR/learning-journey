@@ -1,0 +1,106 @@
+# Fundamentos de Programación
+
+### Sintaxis y Semántica
+
+```mermaid
+flowchart LR
+
+A["Variables y tipos de datos"]
+
+A --> P
+A --> C
+A --> S
+
+subgraph P["Primitivos"]
+direction TB
+P1["Enteros"]
+P2["Decimales"]
+P3["Booleanos"]
+P4["Caracteres"]
+P5["Nulo/Vacío"]
+end
+
+subgraph C["Compuestos"]
+direction TB
+C1["Cadenas"]
+C2["Arrays/Listas"]
+C3["Objetos"]
+C4["Tuplas"]
+end
+
+subgraph S["Sistemas de tipos"]
+direction TB
+S1["Tipado estático"]
+S2["Tipado dinámico"]
+S3["Tipado fuerte"]
+S4["Tipado débil"]
+end
+```
+
+### Operadores
+
+```mermaid
+flowchart LR
+
+A["Operadores"]
+
+A --> M
+A --> C
+A --> L
+A --> S
+A --> B
+A --> T
+
+subgraph M["Aritméticos"]
+direction TB
+P1["+"]
+P2["-"]
+P3["*"]
+P4["/"]
+P5["%"]
+P6["**"]
+end
+
+subgraph C["Comparacion"]
+direction TB
+C1["=="]
+C2["!="]
+C3["<"]
+C4[">"]
+C5["<="]
+C6[">="]
+end
+
+subgraph L["Lógicos"]
+direction TB
+L1["AND"]
+L2["OR"]
+L3["NOT"]
+end
+
+subgraph S["Asignación"]
+direction TB
+S1["="]
+S2["+="]
+S3["-="]
+S4["*="]
+S5["/="]
+end
+
+subgraph B["Bit a Bit"]
+direction TB
+B1["AND"]
+B2["OR"]
+B3["XOR"]
+B4["NOT"]
+end
+
+subgraph T["Ternario"]
+direction TB
+T1["AND"]
+T2["OR"]
+T3["NOT"]
+end
+
+```
+
