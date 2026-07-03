@@ -63,9 +63,6 @@ Each repository would document not only the final implementation but also the en
 
 ---
 
-Thank you for visiting my Learning Journey.
-
-
 ```mermaid
 gitGraph
     commit id:"Learning Journey"
@@ -116,3 +113,4 @@ gitGraph
 
     commit id:"AI + Fintech"
 ```
+Thank you for visiting my Learning Journey.
