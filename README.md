@@ -1,5 +1,7 @@
 # 📚 Learning Journey
 
+### :back::end: ... :soon: 
+
 > *From understanding financial fraud to building the software that helps prevent it.*
 
 Welcome to my learning journey.
