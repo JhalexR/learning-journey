@@ -41,9 +41,9 @@
 
 ##### Tengo que investigar
 
-• Como hacer mejores diagramas con Markdown y mermaid
+* Como hacer mejores diagramas con Markdown y mermaid
 
-• Hacer una portada de repositorio
+* Hacer una portada de repositorio
 
 </details>
 
@@ -69,8 +69,8 @@
 
 ##### Tengo que investigar
 
-• ejemplos de uso de funciones y nombres descriptivos de funciones, para mejorar la abstracción 
+* ejemplos de uso de funciones y nombres descriptivos de funciones, para mejorar la abstracción 
 
-• conozco los ciclos o bucles en java y c++, tengo investigar ciclos de otros lenguajes
+* conozco los ciclos o bucles en java y c++, tengo investigar ciclos de otros lenguajes
 
 </details>
