@@ -62,3 +62,55 @@ Each repository would document not only the final implementation but also the en
 ---
 
 Thank you for visiting my Learning Journey.
+
+
+```mermaid
+gitGraph
+    commit id:"Learning Journey"
+
+    commit id:"C++"
+
+    commit id:"Programming Fundamentals"
+
+    commit id:"Return (2023)"
+
+    branch backend
+
+    checkout backend
+
+    commit id:"Today: on the way..."
+
+    commit id:"Node.js"
+
+    commit id:"REST"
+
+    commit id:"PostgreSQL"
+
+    commit id:"RabbitMQ"
+
+    commit id:"Docker"
+
+    checkout main
+
+    branch architecture
+
+    checkout architecture
+
+    commit id:"Clean Architecture"
+
+    commit id:"DDD"
+
+    commit id:"Microservices"
+
+    checkout main
+
+    merge backend
+
+    merge architecture
+
+    commit id:"Mini Payment Gateway"
+
+    commit id:"Fraud Detection"
+
+    commit id:"AI + Fintech"
+```
