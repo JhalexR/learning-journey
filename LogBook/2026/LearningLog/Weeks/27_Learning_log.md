@@ -46,3 +46,31 @@
 • Hacer una portada de repositorio
 
 </details>
+
+#### 02/07/2026
+
+<details>
+<summary>Haz clic para expandir</summary>
+
+##### Hoy aprendí
+
+* Dominar los fundamentos y conceptos de programación puede ser un diferenciador y ventaja competitiva en tiempos de generación de código con IA.
+
+* Es importante tener muy buen conocimiento para tomar las mejores decisiones.
+
+* Repasé los conceptos básicos desde sintaxis hasta funciones, recordé la importancia de construir las funciones de forma correcta.
+
+* refresqué mis conocimientos básicos de programación.
+
+##### No entendí
+
+* operadores bit a bit y operadores ternarios.
+
+
+##### Tengo que investigar
+
+• ejemplos de uso de funciones y nombres descriptivos de funciones, para mejorar la abstracción 
+
+• conozco los ciclos o bucles en java y c++, tengo investigar ciclos de otros lenguajes
+
+</details>
