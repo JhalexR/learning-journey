@@ -21,3 +21,15 @@
 + Uso de draw.io para diagramar
 
 </details>
+
+#### 02/07/2026
+
+<details>
+<summary>Haz clic para expandir</summary>
+
+##### Investigué sobre:
+
++ Mermaid en MARKDOWN
++ Fundamentos básicos de programación
+
+</details>
