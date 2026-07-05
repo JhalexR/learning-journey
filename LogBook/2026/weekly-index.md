@@ -1,18 +1,18 @@
 # Repositorios trabajados 2026
 
-#### Semana 27 - Domingo 28 Jun - Sábado 4 Jul
+#### Semana 27
 
 <details>
-<summary> expandir </summary>
+<summary> 28 Jun a 4 Jul </summary>
 
 + learning-journey
 
 </details>
 
-#### Semana 28 - Domingo 05 Jul - Sábado 11 Jul
+#### Semana 28 - Domingo 
 
 <details>
-<summary> expandir </summary>
+<summary> 05 Jul a 11 Jul </summary>
 
 + learning-journey
 
