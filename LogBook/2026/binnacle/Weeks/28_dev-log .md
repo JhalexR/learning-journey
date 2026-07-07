@@ -20,3 +20,22 @@
 + hacer practica de buscar las variables importantes, la relación entre las variables y el aumento de complejidad y hacer la función, para entenderlo mucho jeor
 
 </details>
+
+#### 05/07/2026
+
+<details>
+<summary>Haz clic para expandir</summary>
+
+##### Hoy aprendí
+
++ Elegir la estructura correcta hace la diferencia entre un código que muestra resultado instantáneamente o que tarda varios minutos.
+
++ aprendí a diferenciar mejor las estructuras de datos básicas siempre tenia la duda diferenciar arreglo, array, vector, lista, incluso entendí mejor las categorías en las que se puede dividir las estructuras de datos.
+
+##### Tengo que investigar
+
++ sobre estructuras de datos asociativas y jerárquicas 
+
++ Tuplas y registros 
+
+</details>
