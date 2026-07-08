@@ -17,7 +17,7 @@
 
 + buscar mas ejemplos de cada uno de los ordenes de complejidad de un algoritmo
 
-+ hacer practica de buscar las variables importantes, la relación entre las variables y el aumento de complejidad y hacer la función, para entenderlo mucho jeor
++ hacer practica de buscar las variables importantes, la relación entre las variables y el aumento de complejidad y hacer la función, para entenderlo mucho mejor
 
 </details>
 
