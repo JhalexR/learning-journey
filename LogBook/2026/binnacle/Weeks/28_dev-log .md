@@ -39,3 +39,28 @@
 + Tuplas y registros 
 
 </details>
+
+#### 08/07/2026
+
+<details>
+<summary>Haz clic para expandir</summary>
+
+##### Hoy aprendí
+
++ como ha cambiado la importancia de la complejidad espacial debido a la escases de RAM por el auge de la IA o por los requerimientos de apps o funcionalidades que usen IA
+
++ la importancia de la complejidad temporal en las estructuras, escoger la estructura correcta a veces no es escoger la estructura mas rápida O(1).
+
+
+##### No entendí
+
++ como se pueden combinar las estructuras de datos se pueden combinar por ejemplo una lista de vectores,  
+
+
+##### Tengo que investigar
+
++ sobre estructuras de datos jerárquicas 
+
++ combinación de estructuras de datos
+
+</details>
