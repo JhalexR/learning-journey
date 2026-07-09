@@ -64,3 +64,30 @@
 + combinación de estructuras de datos
 
 </details>
+
+#### 09/07/2026
+
+<details>
+<summary>Haz clic para expandir</summary>
+
+##### Hoy aprendí
+
++ Como funcionan las estructuras de datos asociativas - Tablas Hash / Mapas / Diccionarios
+
++ Estructuras de datos asociativas - Conjuntos (sets)
+
+
+##### No entendí
+
++ la forma de usar en combinación tablas hash o función hash con los diccionarios o mapas
+
+
+##### Tengo que investigar
+
++ diferencias entre estructuras de datos abstractos (TDA) y estructuras de datos concretas.
+
++ Profundizar sobre tablas hash diccionarios sets
+
++ ejemplos de uso de tablas hash y diccionarios 
+
+</details>
