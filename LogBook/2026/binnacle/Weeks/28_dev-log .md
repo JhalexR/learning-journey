@@ -30,3 +30,14 @@
 + Estructuras de datos - Lineales
 
 </details>
+
+#### 09/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Investigué sobre:
+
++ Estructuras de datos - Asociativas - Hash - diccionarios - sets
+
+</details>
