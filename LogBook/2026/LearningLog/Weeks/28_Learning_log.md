@@ -91,3 +91,25 @@
 + ejemplos de uso de tablas hash y diccionarios 
 
 </details>
+
+#### 09/07/2026
+
+<details>
+<summary>Haz clic para expandir</summary>
+
+##### Hoy aprendí
+
++ Es mejor aprender a identificar las operaciones que se necesitan hacer ejemplo búsqueda, inserción, orden, porque memorizar las estructuras no ayuda a escoger la mejor estructura para resolver el problema que se plantea en el momento de programar.
+
+##### No entendí
+
++ Las formas en que funcionan las estructuras de datos jerarquicas son bastantes complejas, no entendi a fondo como funciona la complejidad temporal de estas estrcuturas debido a que dependen de muchos factores, operaciones varibles, estructuras combinadas, etc.
+
+
+##### Tengo que investigar
+
++ Profundizar en el uso de estructuras jerarquicas.
+
++ Ejemplos de implementación de las estructuras de datos jerarquicas
+
+</details>
