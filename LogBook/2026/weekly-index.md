@@ -17,3 +17,12 @@
 + learning-journey
 
 </details>
+
+### Semana 29
+
+<details>
+<summary> 12 Jul a 18 Jul </summary>
+
++ learning-journey
+
+</details>
