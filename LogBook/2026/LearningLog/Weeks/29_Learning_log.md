@@ -26,7 +26,7 @@
 
 ##### Hoy aprendí
 
-+ una implementación de Deque puede usarse para construir fácilmente tanto una cola como una pila simplemente limitando qué operaciones se exponen al usuario.
++ una implementación de Bicola _(Deque)_ puede usarse para construir fácilmente tanto una cola como una pila simplemente limitando qué operaciones se exponen al usuario.
 + la cola es un caso particular de la bicola -> Una cola es una bicola con restricciones.
 + Los conjuntos(sets) se enfocan en la pertenencia si un elemento está o no está en la colección.
 + el Conjunto cambia el enfoque desde el orden hacia la unicidad y la pertenencia, lo que lo convierte en una de las estructuras más utilizadas para búsquedas rápidas y eliminación de duplicados.
