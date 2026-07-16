@@ -46,3 +46,22 @@
 	+ sistemas de archivos modernos
 
 </details>
+
+#### 15/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
++ Un árbol es un caso particular de grafo.
++ todo árbol es un grafo, pero no todo grafo es un árbol.
++ El grafo es la estructura ideal para modelar problemas donde importan las conexiones, los caminos y las relaciones,
++ El Arreglo dinámico es la opción predeterminada del TDA Lista en muchos lenguajes modernos.
+
+
+##### Tengo que investigar
+
++ Como se usan los grafos en problemas reales como mapas y GPS, redes de computadoras, rutas aéreas
+
+</details>
