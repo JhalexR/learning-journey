@@ -34,3 +34,17 @@
 + Estructuras concretas: Arreglo Estático (Array),  Arreglo dinámico, 
 
 </details>
+
+</details>
+
+#### 16/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Investigué sobre:
+
++ Estructuras concretas Enlazadas: Matriz, Lista Simplemente Enlazada, Lista circular
++ Estructuras concretas de Dispersión: Tabla Hash (Hash Table)
+
+</details>
