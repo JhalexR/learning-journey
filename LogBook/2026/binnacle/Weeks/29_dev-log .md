@@ -22,3 +22,15 @@
 + TDA Jerárquicos: Arboles 
 
 </details>
+
+#### 15/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Investigué sobre:
+
++ TDA Grafos
++ Estructuras concretas: Arreglo Estático (Array),  Arreglo dinámico, 
+
+</details>
