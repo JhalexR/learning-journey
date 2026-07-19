@@ -10,7 +10,7 @@
 + La Matriz de Adyacencia es una estructura concreta para representar grafos mediante una matriz cuadrada
 + La Matriz de Adyacencia es una implementación concreta basada en un arreglo bidimensional
 + La Matriz de Adyacencia (arreglo bidimensional), pero con un propósito distinto: en lugar de almacenar datos en filas y columnas, cada posición representa la existencia o el peso de una conexión entre dos vértices.
-+ ```
+```
 TDA Grafo
 │
 ├── Matriz de Adyacencia
