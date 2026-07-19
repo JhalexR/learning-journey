@@ -26,3 +26,14 @@
 + learning-journey
 
 </details>
+
+</details>
+
+### Semana 30
+
+<details>
+<summary> 19 Jul a 25 Jul </summary>
+
++ learning-journey
+
+</details>
