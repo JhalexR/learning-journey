@@ -26,3 +26,49 @@ TDA Grafo
 + Comparativa entre las estrcuturas de datos concretas - No lineales
 
 </details>
+
+#### 20/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
++ las estructuras de datos concretas pueden combinarse para implementar un TDA más complejo.
++ árboles y grafos son dos familias distintas de estructuras no lineales: el primero organiza la información de forma jerárquica, mientras que el segundo permite representar relaciones arbitrarias entre elementos.
+
++ Lo que entendí para escoger una estructura si tengo algunos datos que quiero relacionar, no por jerarquías, me haría las siguientes preguntas:
+
+    1. ¿las relaciones tienen peso o solo necesito relacionarlas?
+    2. ¿es un grafo denso o disperso?
+	    + si es denso utilizaría una matriz de adyacencia para relacionarlos
+	    + si es disperso utilizaría una lista de adyacencia para relacionarlos
+
++ la mayoría de los lenguajes modernos son multiparadigma
+
++ Tradicionalmente se dice que:
+	+ Procedimiento → realiza una acción.
+	+ Función → devuelve un valor.
+    + pero en lenguajes modernos ya no existe una diferencia fuerte entre procedimiento y función.
+
++ Paradigmas tradicionales: describen cómo se estructura y escribe el código.
++ Paradigmas transversales: describe cómo se organizan y ejecutan las tareas.
++ Los paradigmas se pueden usar en simultaneo para crear soluciones en código 
++ Un hilo (o thread) es la unidad más pequeña de procesamiento que puede realizar una tarea
+
+
+##### Tengo que investigar
+
++ Sincronización de tareas.
++ Condiciones de carrera (Race Conditions).
++ Deadlocks y Livelocks.
++ Mecanismos de sincronización (Mutex, Semáforos, Monitores, Barreras).
++ Modelos de concurrencia (Memoria compartida, Paso de mensajes, Modelo Actor, CSP).
++ Programación asíncrona (async/await, Promesas, Futures).
++ Programación paralela
++ Programación reactiva
++ Programación dirigida por eventos (Event-Driven Programming)
++ Programación orientada a aspectos (AOP)
++ Programación basada en componentes
+
+</details>
