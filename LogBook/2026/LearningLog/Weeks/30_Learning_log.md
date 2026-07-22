@@ -72,3 +72,65 @@ TDA Grafo
 + Programación basada en componentes
 
 </details>
+
+#### 21/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
++ proceso representa una aplicación completa, un hilo representa una tarea específica dentro de esa aplicación.
++ Race Conditions -> el resultado depende del orden en que se ejecutan las tareas
++ La programación asíncrona -> permite iniciar una operación larga sin detener el resto del programa
++ los paradigmas transversales -> Resuelven necesidades puntuales: No definen cómo se modela todo el software, sino cómo se maneja el tiempo, el flujo de datos, la concurrencia o la separación de funciones secundarias
++ La programación paralela representa un paso más allá de la programación concurrente -> busca que esas tareas se ejecuten realmente al mismo tiempo para aprovechar el hardware moderno
++ La mayoría de los sistemas reactivos son asíncronos.
++ La programación reactiva puede verse como una evolución de la programación dirigida por eventos
+
+```
+Ejemplo de Diferencias EDP vs Reactiva
+|
+|____ Programación dirigida por eventos
+|       |
+|       |_ Cuando haces clic en un botón que guarda un archivo
+|
+|____ Programación reactiva
+        |
+        |_ Aplicación recibe continuamente datos de sensores, los filtra, los transforma y actualiza en tiempo real
+```
+
++ preocupaciones transversales (cross-cutting concerns), es decir, aquellas funcionalidades que aparecen repetidamente en muchas partes del sistema.
+
+```
+Ejemplo de Diferencias POO vs AOP
+|
+|____ Programación Orientada a Objetos
+|       |
+|       |_ Organiza el sistema en objetos que representan el dominio del problema.
+|
+|____ Programación Orientada a Aspectos
+        |
+        |_ Extrae las responsabilidades que se repiten en muchos objetos y las aplica automáticamente donde correspondan
+```
+
++ Programación Orientada a Aspectos
+```
+crearUsuario()←-----|                   |←-- Aspecto Seguridad
+                    |_____ Aspectos ____|       
+eliminarUsuario()←--|                   |←-- Aspecto Logging
+                    |                   |
+actualizarUsuario()←|                   |←-- Aspecto Auditoría...
+```
++ un `microservicio` es una unidad de despliegue, mientras que un `componente` es una unidad de construcción del software.
++ `los componentes` suelen ejecutarse dentro de una misma aplicación y comparten el mismo proceso.
++ cada `servicio` es una aplicación independiente que se comunica con las demás mediante la red (`HTTP`, `gRPC`, `mensajería`, etc.).
+
+
+##### Tengo que investigar
+
++ Patrones de diseño
++ Modularidad y Gestión de Dependencias
++ Manejo de Errores
+
+</details>
