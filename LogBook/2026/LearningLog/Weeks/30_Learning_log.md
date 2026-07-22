@@ -134,3 +134,191 @@ actualizarUsuario()←|                   |←-- Aspecto Auditoría...
 + Manejo de Errores
 
 </details>
+
+#### 22/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+### El bajo acoplamiento 👇
++ **Es uno de los _objetivos más importantes_ del diseño de software.**
+
++ La alta cohesión hace que los módulos sean más fáciles de entender y mantener
++ una dependencia puede ser Cualquier componente que un módulo necesite para funcionar.
++ Dependencias internas → Son módulos creados dentro del mismo proyecto. 
++ Dependencias externas → herramientas desarrolladas por terceros. (npm, cargo, pip...) 
++ gestión de dependencias externas → ¿Cómo incorporo componentes externos de forma organizada?
+
+```mermaid
+flowchart LR
+
+TITLE["📚 Diseño de Software"]
+
+TITLE --> MOD
+TITLE --> DEP
+
+subgraph MOD["📦 Modularidad"]
+direction TB
+
+M1["¿Cómo divido mi programa?"]
+
+M2["Compras"]
+
+M3["Productos"]
+
+M4["Usuarios"]
+
+M5["Pagos"]
+
+M1 --> M2
+M1 --> M3
+M1 --> M4
+M1 --> M5
+
+end
+
+subgraph DEP["🔗 Gestión de Dependencias"]
+direction TB
+
+D1["¿Cómo se comunican?"]
+
+D2["Módulos"]
+
+D3["Bibliotecas"]
+
+D4["APIs"]
+
+D5["Base de Datos"]
+
+D1 --> D2
+D1 --> D3
+D1 --> D4
+D1 --> D5
+
+end
+
+classDef title fill:#0B5394,color:#fff,stroke:#073763,stroke-width:3px;
+
+classDef modular fill:#D9EAD3,stroke:#6AA84F,color:#000;
+
+classDef dependency fill:#D0E0FF,stroke:#3D85C6,color:#000;
+
+class TITLE title;
+
+class M1,M2,M3,M4,M5 modular;
+
+class D1,D2,D3,D4,D5 dependency;
+```
+
++ Modularidad: decide qué partes tendrá el sistema.
++ Gestión de dependencias: decide cómo colaboran esas partes y cómo utilizan recursos internos o externos.
+
+**Analogia:**
+
+🏢 Construir un edificio
+| 1️⃣ Modularidad            | 2️⃣ Gestión de dependencias           |
+| --------------------------| --------------------------------------|
+| ¿Cómo divido el edificio? | ¿Cómo se conectan esas habitaciones?  |
+|📍 Cocina                  | 🚰 Tuberías                          |
+|📍 Sala                    | ⚡ Electricidad                      |
+|📍 Dormitorio              | 🌐 Internet                          |
+|📍 Baño                    | 🚪 Puertas                           |
+
++ orden lógico que se sigue al diseñar software
+	+ organizas el sistema en módulos con responsabilidades claras
+	+ estableces cómo interactúan entre ellos y con los recursos que necesitan para funcionar.
+
++ _La relación entre modularidad y dependencia es uno de los **temas fundamentales del desarrollo de software**, porque:_
+	+ **Se diseñan sistemas que pueden crecer, mantenerse y evolucionar con el tiempo**
+
++ Los módulos deben estructurarse en capas (ej. de presentación a datos) **en una sola dirección**
+
+```mermaid
+flowchart TB
+
+%%=========================================================
+%% TITULO
+%%=========================================================
+
+TITLE["🏛️ Buenas Prácticas de Diseño de Software"]
+
+TITLE --> MOD
+TITLE --> DEP
+
+%%=========================================================
+%% MODULARIDAD
+%%=========================================================
+
+subgraph MOD["🧱 Modularidad"]
+direction TB
+
+M1["🎯 Alta cohesión<br/>Una responsabilidad por módulo"]
+
+M2["🔗 Bajo acoplamiento<br/>Módulos independientes"]
+
+M3["📜 Contratos estables<br/>Interfaces / APIs"]
+
+M4["🚫 Sin dependencias circulares"]
+
+end
+
+%%=========================================================
+%% DEPENDENCIAS
+%%=========================================================
+
+subgraph DEP["📦 Gestión de Dependencias"]
+direction TB
+
+D1["📦 Gestores de paquetes<br/>npm • Maven • Gradle • NuGet"]
+
+D2["💉 Inyección de Dependencias (DI)"]
+
+D3["🏷️ Versionado Semántico<br/>SemVer"]
+
+D4["📄 Dependencias explícitas<br/>package.json • pom.xml"]
+
+end
+
+%%=========================================================
+%% RESULTADO
+%%=========================================================
+
+MOD --> RESULT
+DEP --> RESULT
+
+RESULT["✅ Software mantenible<br/>✅ Escalable<br/>✅ Flexible<br/>✅ Fácil de probar"]
+
+%%=========================================================
+%% ESTILOS
+%%=========================================================
+
+classDef title fill:#0B5394,color:#fff,stroke:#073763,stroke-width:3px;
+
+classDef modular fill:#D9EAD3,stroke:#6AA84F,color:#000;
+
+classDef dependency fill:#D0E0FF,stroke:#3D85C6,color:#000;
+
+classDef result fill:#FFF2CC,stroke:#BF9000,color:#000;
+
+class TITLE title;
+
+class M1,M2,M3,M4 modular;
+
+class D1,D2,D3,D4 dependency;
+
+class RESULT result;
+```
+
++ **SemVer (Versionado Semántico)** → convención de numeración de software estructurada como Mayor.Menor.Parche (ej. `2.5.1`).
++ **SemVer (Versionado Semántico)** → indica si una nueva versión es compatible con la anterior y si añade funciones o solo corrige errores
++ *breaking changes* → Cuando se hace cambios incompatibles en la API o en el código que rompen la compatibilidad con versiones anteriores
+
+##### Tengo que investigar
+
++ arquitectura de software 
++ patrones de diseño 
++ principios SOLID 
+
+</details>
