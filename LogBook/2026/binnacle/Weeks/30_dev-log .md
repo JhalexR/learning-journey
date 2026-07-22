@@ -48,3 +48,14 @@
 	 Programación Basada en Componentes
 
 </details>
+
+#### 22/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Investigué sobre:
+
++ Modularidad y gestión de dependencias
+
+</details>
