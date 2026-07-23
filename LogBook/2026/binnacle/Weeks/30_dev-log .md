@@ -44,8 +44,8 @@
 	+ Programación Paralela
 	+ Programación Reactiva
 	+ Programación Dirigida por Eventos (Event-Driven Programming)
-	 Programación Orientada a Aspectos (AOP)
-	 Programación Basada en Componentes
+	+ Programación Orientada a Aspectos (AOP)
+	+ Programación Basada en Componentes
 
 </details>
 
