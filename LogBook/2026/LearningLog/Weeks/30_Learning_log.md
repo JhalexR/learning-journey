@@ -322,3 +322,73 @@ class RESULT result;
 + principios SOLID 
 
 </details>
+
+#### 23/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
++ Los errores van a ocurrir; la pregunta es cómo los manejas.
++ Algunos errores ocurren porque el mundo real es impredecible
++ Errores esperados (Fallos operacionales) → forman parte del funcionamiento normal
++ Errores irrecuperables → continuar ejecutando el programa sería peligroso o imposible
++ Errores irrecuperables → 🚨Finalizar el programa de forma controlada o activar procedimientos de emergencia.🚨
++ **En la práctica profesional, una de las ✅habilidades más valiosas✅ es ‼️🚨clasificar correctamente un problema‼️🚨 antes de decidir cómo tratarlo**
+
+| Tipo de error                                | Descripción                                                   | Ejemplo                                                                      | Acción recomendada                                                                 |
+| -------------------------------------------- | ------------------------------------------------------------- | ---------------------------------------------------------------------------- | ---------------------------------------------------------------------------------- |
+| **Errores de programación (bugs)**           | Defectos en el código escritos por el desarrollador.          | División entre cero, error lógico, variable inexistente.                     | Corregir el código mediante depuración y pruebas.                                  |
+| **Errores esperados (fallos operacionales)** | Situaciones normales y previsibles del entorno o del usuario. | Archivo inexistente, contraseña incorrecta, fallo de red.                    | Detectar y manejar el error para que el programa continúe o informe adecuadamente. |
+| **Errores irrecuperables**                   | Fallos críticos que impiden continuar de forma segura.        | Corrupción de memoria, agotamiento de memoria, estado interno inconsistente. | Finalizar el programa de forma controlada o activar procedimientos de emergencia.  |
+
++ Mecanismo de manejo de errores → los dos más importantes y universales son:
+	+ **Excepciones** _(Exceptions)_
+	+ **Valores de retorno** _(Return Values)_
++ Las excepciones permiten separar → _el código que realiza el `trabajo`_ ╣╠ _del código que maneja los `errores`.
++ `Capturar` → significa que un manejador "captura" el error para darle un proceso adecuado
+
+```java
+try {
+// Código que puede fallar
+} catch (error) {
+// Manejar el error
+} finally {
+// Siempre se ejecuta (limpieza)
+}
+```
++ Valores de retorno método usado antes de que se crearan las excepciones 
+
+	+ Retornar null/undefined para indicar ausencia.
+	+ Retornar objetos Result/Either con éxito o error.
+	+ _Códigos de error (menos común en lenguajes modernos)._
+
+
++ Uso recomendado:
+	+ `Excepciones` → **Errores inesperados o excepcionales**
+	+ `Valores de retorno` → **Errores esperados y frecuentes**
+
+	↑
+
++ **Esta no es una regla absoluta**
+
++ **Go** o **Rust**, favorecen el uso de `valores de retorno` 
+
+	↓
+
+	+ en **Go** `error`
+	+ en **Rust** `Result<T, E>`
+
++ Con Los **errores irrecuperables** se tiende a provocar la **finalización controlada del programa** porque no existe una forma **segura de continuar**
+
+##### Tengo que investigar
+
++ Principios de Manejo de Errores 
++ Errores en Código Asíncrono 
++ patron de diseño 
+	+ Guard Clauses 
+	+ Default Values
+
+
+</details>
