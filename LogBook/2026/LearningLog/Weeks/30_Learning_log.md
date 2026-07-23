@@ -142,8 +142,8 @@ actualizarUsuario()←|                   |←-- Aspecto Auditoría...
 
 ##### Hoy aprendí
 
-### El bajo acoplamiento 👇
-+ **Es uno de los _objetivos más importantes_ del diseño de software.**
+
++ **🚨El bajo acoplamiento‼️ Es uno de los ✅_objetivos más importantes_✅ del diseño de software.**
 
 + La alta cohesión hace que los módulos sean más fáciles de entender y mantener
 + una dependencia puede ser Cualquier componente que un módulo necesite para funcionar.
