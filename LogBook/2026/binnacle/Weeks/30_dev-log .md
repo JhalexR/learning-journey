@@ -72,3 +72,16 @@
 + Manejo de Errores → Principios de Manejo de Errores
 
 </details>
+
+#### 24/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Investigué sobre:
+
++ Manejo de Errores → principio de manejo de errores
++ Manejo de Errores → Errores en Código Asíncrono 
++ Manejo de Errores → Patrones Comunes, Guard Clauses, Default Values
+
+</details>
