@@ -483,16 +483,6 @@ flowchart LR
     BAD["🚫 No ocultar errores"]
 
     BAD -.-> F4
-
-    classDef error fill:#F4CCCC,stroke:#CC0000,color:#000;
-    classDef process fill:#D9EAD3,stroke:#6AA84F,color:#000;
-    classDef decision fill:#FFF2CC,stroke:#BF9000,color:#000;
-    classDef end fill:#D0E0FF,stroke:#3D85C6,color:#000;
-
-    class ERROR,BAD error;
-    class F1,F3,F4,F5 process;
-    class F2 decision;
-    class F6 end;
 ```
 
 + los errores en código asíncrono están relacionados a:
@@ -510,17 +500,30 @@ flowchart LR
 + uso básico de Guard Clauses y Default Values:
 
 ```mermaid
-
 flowchart LR
 
 A[Entrar]
-B[Validar datos obligatorios - (Guard Clauses)]
-C[Asignar valores opcionales - (Default Values)]
-D[Ejecutar lógica principal]
+B[Validar datos obligatorios]
+C[Asignar valores opcionales]
+D[Ejecutar logica principal]
 
 A --> B
 B --> C
 C --> D
+
+```
+
+```mermaid
+flowchart LR
+
+B[Validar datos obligatorios]
+C[Asignar valores opcionales]
+
+E[Guard Clauses]
+F[Default Values]
+
+E --> B
+F --> C
 ```
 ##### Tengo que investigar
 
