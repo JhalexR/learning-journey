@@ -392,3 +392,140 @@ try {
 
 
 </details>
+
+#### 24/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+
++ se emplean los principios de manejo de errores para evitar por ejemplo que Dos desarrolladores pueden usar `try/catch` y obtener resultados muy distintos dependiendo de cómo los empleen.
++ Fail Fast → Es mejor fallar temprano que producir resultados incorrectos más adelante. 
++ Uno de los errores más comunes de los programadores principiantes es intentar capturar cualquier excepción.
++ **✅Capturar únicamente las excepciones que realmente sabemos resolver.✅**
++ aplicación bien diseñada tiene dos tipos de mensajes:
+	+ Mensaje técnico, registrado en los logs para los desarrolladores.
+	+ Mensaje amigable, mostrado al usuario.
++ Ocurre un error:
+	+ ¿Lo resuelvo aquí?
+	+ ¿Lo dejo subir hasta que alguien mas pueda resolverlo?
++ *En arquitecturas por capas (Clean Architecture, Onion, Hexagonal, DDD, etc.) la propagación de errores es una de las **reglas más importantes**.*
+	+ **Cada capa debe encargarse únicamente de los errores que realmente puede resolver. Si no puede resolverlos, debe propagarlos a la capa superior.**
+
+```mermaid
+flowchart TB
+
+subgraph UI["🖥️ Presentación"]
+
+VIEW["Interfaz"]
+
+end
+
+subgraph APP["⚙️ Aplicación"]
+
+SERVICE["Servicio"]
+
+end
+
+subgraph INFRA["🗄️ Infraestructura"]
+
+REPO["Repositorio"]
+
+DATABASE["Base de Datos"]
+
+end
+
+DATABASE -->|"Error"| REPO
+
+REPO -->|"No puede resolverlo"| SERVICE
+
+SERVICE -->|"No puede recuperarse"| VIEW
+
+VIEW --> USER["👤 Mostrar mensaje al usuario"]
+
+NOTE["💡 Cada capa sólo resuelve los errores que conoce. Si no puede resolverlos, los propaga hacia arriba."]
+
+SERVICE -.-> NOTE
+
+classDef layer fill:#D0E0FF,stroke:#3D85C6,color:#000;
+classDef note fill:#D5E8D4,stroke:#6AA84F,color:#000;
+
+class VIEW,SERVICE,REPO,DATABASE layer;
+class NOTE note;
+```
+
++ Regla práctica:
+	+ **¿Tengo suficiente información y autoridad para resolver este error?**
+		+ **SI**, entonces debe `manejarlo`.
+		+ **NO**, entonces debe `propagarlo`.
+
+```mermaid
+flowchart LR
+
+    ERROR["⚠️ Error"]
+
+    ERROR --> F1["⚡ Detectarlo pronto<br/>(Fail Fast)"]
+
+    F1 --> F2{"¿Puede resolverse?"}
+
+    F2 -->|Sí| F3["✅ Manejar"]
+
+    F2 -->|No| F4["📤 Propagar"]
+
+    F3 --> F5["💬 Mensaje útil"]
+
+    F4 --> F5
+
+    F5 --> F6["🏁 Fin"]
+
+    BAD["🚫 No ocultar errores"]
+
+    BAD -.-> F4
+
+    classDef error fill:#F4CCCC,stroke:#CC0000,color:#000;
+    classDef process fill:#D9EAD3,stroke:#6AA84F,color:#000;
+    classDef decision fill:#FFF2CC,stroke:#BF9000,color:#000;
+    classDef end fill:#D0E0FF,stroke:#3D85C6,color:#000;
+
+    class ERROR,BAD error;
+    class F1,F3,F4,F5 process;
+    class F2 decision;
+    class F6 end;
+```
+
++ los errores en código asíncrono están relacionados a:
+	+ programación concurrente, 
+	+ programación reactiva 
+	+ programación dirigida por eventos
++ La diferencia fundamental entre el manejo de errores en código síncrono y `asíncrono` no está en qué errores pueden ocurrir, **sino en cuándo ocurren**.
+
++ los patrones son → **formas recomendadas de escribir el código para hacerlo más seguro y fácil de mantener**.
+
++ Patrones de programación que aparecen constantemente en código profesional para prevenir errores y hacer que el código sea más claro
+	+ Guard Clauses → conviene utilizarlo únicamente para validar **precondiciones importantes**
+	+ Default Values → Cuando la ausencia del dato no representa realmente un error.
+
++ uso básico de Guard Clauses y Default Values:
+
+```mermaid
+
+flowchart LR
+
+A[Entrar]
+B[Validar datos obligatorios - (Guard Clauses)]
+C[Asignar valores opcionales - (Default Values)]
+D[Ejecutar lógica principal]
+
+A --> B
+B --> C
+C --> D
+```
+##### Tengo que investigar
+
++ Debugging y Resolución de Problemas 
++ Cómo Leer Mensajes de Error 
++ Técnicas de Debugging 
+
+</details>
