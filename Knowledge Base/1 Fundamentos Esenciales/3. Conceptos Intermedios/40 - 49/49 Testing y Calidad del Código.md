@@ -73,7 +73,7 @@ Por eso apareció la Pirámide de Testing.
 
 Representa cómo debería distribuirse la mayoría de las pruebas de un proyecto.
 
-
+![Pirámide de Testing](https://github.com/JhalexR/learning-journey/blob/main/Knowledge%20Base/1%20Fundamentos%20Esenciales/Mapas/Testing%20y%20Calidad%20del%20C%C3%B3digo/Pramide%20del%20testing.png)
 
 Mientras más abajo:
 
