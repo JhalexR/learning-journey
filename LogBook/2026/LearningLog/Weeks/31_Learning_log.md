@@ -102,3 +102,26 @@ B --> C
 + Deuda Técnica 
 
 </details>
+
+#### 27/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
++ **Refactoring**
++ :boom: "Primero haz que funcione, luego haz que sea limpio." :boom:
++ Si nunca mejoramos el código, termina siendo difícil de entender y modificar.
++ El objetivo **NO** es `agregar` nuevas funcionalidades :fire:
++ :heavy_exclamation_mark: :heavy_equals_sign: refactoring es diferente de optimización
++ A veces un refactoring mejora el rendimiento, pero ese no es su objetivo principal.
++ ¿Cuándo Refactorizar? → **No existe una regla absoluta**
++ ¿Cuándo Refactorizar? → :heavy_exclamation_mark: No todo código imperfecto necesita mejorarse :heavy_exclamation_mark: → **:gem: El tiempo también es un recurso :gem:**
+
+##### Tengo que investigar
+
++ Refactoring
++ Deuda técnica 
+
+</details>
