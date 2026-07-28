@@ -10,3 +10,13 @@
 + Debugging y Resolución de Problemas → Errores Comunes por Categoría
 
 </details>
+
+#### 27/07/2026
+
+<details>
+<summary>expandir</summary>
+
++ Refactoring → cuando refactorizar 
++ Refactoring → Técnicas  
+
+</details>
