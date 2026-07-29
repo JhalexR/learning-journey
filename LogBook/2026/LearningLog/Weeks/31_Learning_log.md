@@ -125,3 +125,38 @@ B --> C
 + Deuda técnica 
 
 </details>
+
+#### 29/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
++ **Refactoring Tenicas**
++ Rename (Renombrar) → :boom: "Un buen nombre puede ahorrar muchos comentarios." :boom:
++ El refactoring es una práctica continua → no se considera una tarea excepcional → acompaña al desarrollo diario
++ **Deuda tecnica:**
++ :heavy_exclamation_mark: La deuda técnica aparece cuando posponemos mejoras o tomamos atajos que dificultan el mantenimiento futuro.
++ _"Es el trabajo pendiente que dejamos en el código y que tarde o temprano tendremos que pagar"_
++ **No siempre aparece por malas prácticas → pero no debe perderse de vista** 
++ **:gem: No toda deuda debe resolverse inmediatamente :gem:**
++ _El objetivo es mantenerla bajo control_
++ La deuda técnica está conectada con varios temas:
+
+| Concepto               | Relación con la deuda técnica                                                                         |
+| ---------------------- | ----------------------------------------------------------------------------------------------------- |
+| **Modularidad**        | Un diseño modular reduce la acumulación de deuda al facilitar cambios aislados.                       |
+| **Manejo de errores**  | Un manejo de errores claro evita soluciones improvisadas que generan deuda.                           |
+| **Testing**            | Los tests permiten refactorizar con seguridad y reducir deuda técnica.                                |
+| **Refactoring**        | Es la principal técnica para disminuir la deuda acumulada sin cambiar el comportamiento del software. |
+| **Calidad del código** | Una buena calidad desde el inicio reduce la necesidad de correcciones costosas en el futuro.          |
+
++ **El refactoring** + _buenos tests automatizados_, mantienen la deuda técnica **bajo control**.
+
+##### Tengo que investigar
+
++ Datos y comunicacion → Redes Básicas
++ Datos y comunicacion → HTTP/HTTPS
+
+</details>
