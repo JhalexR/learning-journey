@@ -229,6 +229,7 @@ Es probablemente la técnica más utilizada.
 
 + Consiste en mover un bloque de código a una nueva función con un nombre descriptivo.
 
+_Ejemplo 1_
 ```javascript
 // Antes:
 function registrarUsuario(usuario) {
@@ -246,3 +247,206 @@ function registrarUsuario(usuario) {
     enviarCorreoBienvenida(usuario);
 }
 ```
+_Ejemplo 2_
+```javascript
+// Antes
+function processOrder(order) {
+// 20 líneas validando
+// 30 líneas calculando total
+// 15 líneas enviando email
+}
+// Después
+function processOrder(order) {
+validateOrder(order);
+const total = calculateTotal(order);
+sendConfirmationEmail(order, total);
+}
+```
++ Ahora cada función tiene una responsabilidad clara.
+
+**Ventajas**
+
++ funciones más pequeñas
++ mayor reutilización
++ mejor legibilidad
++ pruebas más sencillas.
+
+### 2. Rename (Renombrar)
+
++ Muchas veces el código funciona perfectamente → El problema es que nadie entiende los nombres.
+
+```javascript
+//antes
+let x = 10;
+let y = 5;
+let z = x * y;
+
+//despues
+let precio = 10;
+let cantidad = 5;
+let subtotal = precio * cantidad;
+```
++ No cambió la lógica. → Solo cambió la comprensión. 
+
+**¿Qué se puede renombrar?**
++ variables
++ funciones
++ clases
++ archivos
++ módulos
++ parámetros.
+
+_**Un buen nombre puede ahorrar muchos comentarios.**_
+
+### 3. Replace Magic Numbers (Reemplazar Números Mágicos)
+
++ Un Magic Number es un número cuyo significado no es evidente.
++ Usar constantes con nombre en lugar de valores literales
+
+**Ejemplos:**
+
+```javascript
+if (edad >= 18)
+
+//Después del refactoring:
+
+const EDAD_MINIMA = 18;
+const IVA = 0.19;
+
+if (edad >= EDAD_MINIMA) {
+    ...
+}
+```
+**¿Por qué 18?** → no siempre se sabe el motivo de un valor constante por ejemplo la edad de mayoria legal puede cambiar por país.
+
+```javascript
+precio = subtotal * 1.19;
+
+precio = subtotal * (1 + IVA);
+```
+**¿Por qué 1.19?** → el % de impuestos varia habitualmente
+
++ Ahora el código explica por sí mismo qué representan esos valores.
+
+**Ventajas**
+
++ facilita el mantenimiento
++ evita errores al cambiar valores
++ mejora la legibilidad.
+
+### 4. Simplify Conditionals (Simplificar Condicionales)
+
+Con el tiempo, las condiciones pueden volverse muy complejas.
+
+Antes:
+
+```javascript
+if (
+    usuario != null &&
+    usuario.activo &&
+    usuario.edad >= 18 &&
+    !usuario.bloqueado &&
+    usuario.emailVerificado
+) {
+    ...
+}
+```
+Después:
+
+```javascript
+if (puedeIniciarSesion(usuario)) {
+    ...
+}
+```
+Y la lógica queda encapsulada:
+```javascript
+function puedeIniciarSesion(usuario) {
+    return (
+        usuario != null &&
+        usuario.activo &&
+        usuario.edad >= 18 &&
+        !usuario.bloqueado &&
+        usuario.emailVerificado
+    );
+}
+```
+
+Ahora el código principal expresa claramente la intención, mientras que los detalles permanecen en una función especializada.
+
+### Relación entre estas técnicas
+
+| Técnica                   | Problema que resuelve            | Beneficio principal                                             |
+| ------------------------- | -------------------------------- | --------------------------------------------------------------- |
+| **Extract Method**        | Funciones demasiado largas       | Divide responsabilidades y mejora la reutilización.             |
+| **Rename**                | Nombres poco claros              | Hace el código más comprensible.                                |
+| **Replace Magic Numbers** | Valores sin significado evidente | Explica el propósito de los valores y facilita cambios futuros. |
+| **Simplify Conditionals** | Condiciones difíciles de leer    | Hace que la lógica de decisión sea más clara y mantenible.      |
+
+_Cada una resuelve un problema distinto._
+
+### Ejemplo de un refactoring completo
+
+**Código original:**
+
+```javascript
+function calcular(a, b) {
+    let x = a * 0.19;
+
+    if (b == 1 && a > 0 && a < 1000) {
+        return a + x;
+    }
+
+    return a;
+}
+```
+
+**Después de aplicar varias técnicas:**
+
+```javascript 
+const IVA = 0.19;
+
+function calcularTotal(precio, aplicaIVA) {
+    if (!debeAplicarIVA(precio, aplicaIVA)) {
+        return precio;
+    }
+
+    return precio + calcularIVA(precio);
+}
+
+function calcularIVA(precio) {
+    return precio * IVA;
+}
+
+function debeAplicarIVA(precio, aplicaIVA) {
+    return aplicaIVA && precio > 0 && precio < 1000;
+}
+```
+
+Se aplicaron varias mejoras:
+
++ **Rename:** `a` → `precio`, `b` → `aplicaIVA`.
++ **Replace Magic Numbers:** `0.19` → `IVA`.
++ **Extract Method:** `calcularIVA()` y `debeAplicarIVA()`.
++ **Simplify Conditionals:** la condición compleja quedó encapsulada en una función con un nombre descriptivo.
+
+El comportamiento del programa sigue siendo el mismo, pero ahora el código es mucho más fácil de entender, mantener y probar.
+
+### Ideas clave
+
++ **Refactoring** consiste en mejorar la estructura interna del código sin modificar su comportamiento observable.
++ Es recomendable **refactorizar** cuando 
+    + El código es difícil de entender
+    + Contiene duplicación
+    + Ha crecido demasiado 
+    + Antes de añadir nuevas funcionalidades.
++ **NO** suele ser buena idea refactorizar:
+    + Durante una emergencia
+    + Cuando no existen pruebas que protejan el comportamiento 
+    + Cuando el código dejará de usarse pronto.
++ **Los tests** automatizados son la principal red de seguridad durante un refactoring.
++ **Las técnicas:**
+    + Extract Method
+    + Rename
+    + Replace Magic Numbers 
+    + Simplify Conditionals 
+    + son algunas de las prácticas más utilizadas para _producir código más limpio, legible y mantenible_.
