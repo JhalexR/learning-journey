@@ -20,3 +20,15 @@
 + Refactoring → Técnicas  
 
 </details>
+
+#### 29/07/2026
+
+<details>
+<summary>expandir</summary>
+
++ Refactoring → cuando refactorizar 
++ Refactoring → Técnicas  
++ Deuda técnica → identificación
++ Deuda técnica → Gestión
+
+</details>
