@@ -6,7 +6,7 @@
 ##### Hoy aprendí
 
 + En la práctica profesional, un desarrollador dedica una parte importante de su tiempo a investigar por qué un programa no se comporta como esperaba.
-+ :x:"hacer que el error desaparezca" :x: **:white_check_mark: descubrir la causa raíz del problema: white_check_mark: → :white_check_mark: solucionarla de forma correcta :white_check_mark:**
++ :x:"hacer que el error desaparezca" :x: **:white_check_mark: descubrir la causa raíz del problema → :white_check_mark: solucionarla de forma correcta**
 + **:white_check_mark: El debugging no es únicamente una habilidad técnica, sino también una forma de pensar. :white_check_mark:**
 
 ```
@@ -54,7 +54,7 @@ Seguir investigando
 + Siempre existirán errores, el buen desarrollador no es quien no comete errores sino quien tiene una **excelente depuración**
 + Muchos bugs se resuelven después de un descanso, una ducha, o una noche de sueño.
 + Usa la IA para aprender, no solo para solucionar.
-	+ Pega el error y el código relevante aen el chat de la IA, Pregunta no cómo arreglarlo, sino POR QUÉ ocurre
+	+ Pega el error y el código relevante en el chat de la IA, Pregunta no cómo arreglarlo, sino POR QUÉ ocurre
 
 **Testing**
 
