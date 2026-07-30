@@ -160,3 +160,70 @@ B --> C
 + Datos y comunicacion → HTTP/HTTPS
 
 </details>
+
+#### 30/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+### Redes Básicas:
++ El Modelo **Cliente-Servidor** → es una arquitectura de comunicación
++ **Servidor** es la parte del sistema que concentra la lógica principal y protege los datos sensibles.
++ La **IP** identifica un **dispositivo** dentro de una red, no una aplicación.
++ Un **puerto** es un número lógico que identifica una **aplicación o servicio específico** dentro de un dispositivo.
++ `localhost` es un nombre especial que siempre hace referencia al propio dispositivo desde el que se está ejecutando el programa → **útil durante el desarrollo y las pruebas.**
+
+### DNS
++ Si un servidor DNS deja de funcionar, normalmente otro puede responder la consulta.
+
+```mermaid
+flowchart LR
+
+    STEP1["① Usuario<br/>Escribe www.github.com"]
+
+    STEP2["② Navegador<br/>Necesita conocer la IP"]
+
+    STEP3["③ Consulta DNS"]
+
+    STEP4["④ DNS responde<br/>140.82.114.4"]
+
+    STEP5["⑤ HTTPS<br/>140.82.114.4:443"]
+
+    STEP6["⑥ Servidor GitHub"]
+
+    STEP1 --> STEP2
+    STEP2 --> STEP3
+    STEP3 --> STEP4
+    STEP4 --> STEP5
+    STEP5 --> STEP6
+
+    classDef process fill:#D9EAD3,stroke:#6AA84F,color:#000;
+    classDef dns fill:#D0E0FF,stroke:#3D85C6,color:#000;
+    classDef server fill:#FCE5CD,stroke:#E69138,color:#000;
+
+    class STEP1,STEP2 process;
+    class STEP3,STEP4 dns;
+    class STEP5,STEP6 server;
+```
++ El **DNS** solo traduce nombres → Una vez obtenida la IP → el DNS deja de intervenir.
++ Cuando un cliente realiza una consulta **DNS**, puede recibir una de varias direcciones **IP** disponibles.
+
+### Protocolos
++ **TCP** → Prioriza la confiabilidad
++ **UDP** → Prioriza la velocidad
++ En el **Modelo OSI** que se compone 7 capas → la capa numero cuatro llamada **Capa de Transporte** es donde generalmente funcionan los protocolos **TCP** y **UDP**
++ La **IANA** (_Autoridad de Números Asignados de Internet, o Internet Assigned Numbers Authority_) es la organización global encargada de coordinar los identificadores técnicos únicos que permiten que todo Internet funcione de forma conectada y sin duplicaciones
++ El _3 de febrero de 2011_ **IANA** entregó los últimos bloques /8 libres de `IPv4` -> Hoy todas las direcciones IPv4 útiles del mundo están ocupadas
++ **ICANN** → _Corporación de Internet para la Asignación de Nombres y Números_
++ La idea central es que **IPv4** sea un subconjunto de **IPv8** -> **IPv4** seguiría funcionando como parte del nuevo protocolo --> Esta es la principal ventaja de **IPv8** frente a **IPv6**
+
+##### Tengo que investigar
+
++ HTTP/HTTPS en Detalle 
++ Estructura de una Petición HTTP 
++ Estructura de una Respuesta HTTP 
++ Códigos de Estado Importantes 
+
+</details>
