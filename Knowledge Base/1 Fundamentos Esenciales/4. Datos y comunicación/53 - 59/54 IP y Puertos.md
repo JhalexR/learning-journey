@@ -40,7 +40,6 @@ Debido a que ya no había suficientes direcciones IPv4 para todos los dispositiv
 + Su formato es más largo.
     + _2001 : 0db8 : 85a3 : 0000 : 0000 : 8a2e : 0370 : 7334_ :point_left:
 
-
 **Longitud:** Tiene 128 bits en total (a diferencia de los 32 bits de IPv4).
 
 **Hextetos:** Se divide en 8 bloques o hextetos de 16 bits cada uno.
@@ -51,6 +50,16 @@ Debido a que ya no había suficientes direcciones IPv4 para todos los dispositiv
 + Los bloques consecutivos de puros ceros se pueden reemplazar una sola vez por dos puntos dobles (::
     + _2001 : db8 : 85a3 :: 8a2e : 370 : 7334_ :point_left:
     + _2001 : 4860: 4860 :: 8888_
+
+**IPv8**
+
++ Es una propuesta de protocolo de red presentada como borrador técnico
++ A diferencia de IPv6, que requiere una migración compleja de toda la infraestructura
++ IPv8 está diseñado para coexistir y respetar la arquitectura de IPv4 de forma nativa.
+
+**IPv8** _Surge para ampliar las direcciones IP a 64 bits y solucionar el agotamiento de IPv4 sin romper la compatibilidad con los sistemas antiguos_
+
+[Articulo IPv8](https://github.com/JhalexR/learning-journey/blob/main/Knowledge%20Base/2%20Articulos%20e%20investigaciones/2%20IPv8.md) :point_left:
 
 ### ¿Qué identifica una IP?
 
@@ -259,6 +268,30 @@ Aplicaciones ←→ Sistema Operativo ←→ Paquetes
 | Dirección IP | Identifica un dispositivo dentro de una red.                                        |
 | Puerto       | Identifica un servicio o aplicación dentro de ese dispositivo.                      |
 | IP + Puerto  | Identifican un punto de comunicación específico al que un cliente puede conectarse. |
+
+### ¿Que es IANA? 
+
++ **IANA** 
+    + _Internet Assigned Numbers Authority_
+    + _Autoridad de Números Asignados de Internet_ 
+
+Es la organización global encargada de coordinar los identificadores técnicos únicos que permiten que todo Internet funcione de forma conectada y sin duplicaciones.
+
+### ¿Qué funciones realiza?
+
+El trabajo de la IANA se divide en tres áreas principales de la infraestructura de la red:
+
++ **Direccionamiento IP:** Controla la reserva global de direcciones IP (IPv4 e IPv6) y números de sistemas autónomos, distribuyéndolos en bloques a los registros regionales para su uso mundial
+
++ **Gestión de la zona raíz del DNS:** Mantiene los registros oficiales del sistema de nombres de dominio, encargándose de los dominios de nivel superior
+
++ **Parámetros de protocolos:** Administra los códigos, puertos y estándares técnicos que los programas y protocolos de red (como TCP o UDP) necesitan para entenderse entre sí
+
+### ¿Quién la administra?
+
++ Estas tareas requieren una administración neutral y centralizada
++ Desde 1998, estas funciones son desempeñadas por la organización **ICANN**
+    + _Corporación de Internet para la Asignación de Nombres y Números_
 
 ### Ideas Clave
 
