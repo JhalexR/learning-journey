@@ -32,3 +32,15 @@
 + Deuda técnica → Gestión
 
 </details>
+
+#### 30/07/2026
+
+<details>
+<summary>expandir</summary>
+
++ Cómo Funciona Internet → básico
++ Redes Básicas → Protocolos de la Capa de Transporte 
++ Redes Básicas → DNS
++ IP y puertos
+
+</details>
