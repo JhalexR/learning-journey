@@ -117,3 +117,5 @@ Actualmente:
     + Integrar funciones de gestión y seguridad
 
 + Pero sigue siendo un **Internet-Draft** individual del **IETF**, _sin adopción oficial_ ni despliegue en la Internet actual
+
+> Rojano, E. (no date) El protocolo que resuelve el agotamiento de IPv4, IPv8. Available at: https://ipv8.es/ (Accessed: 30 July 2026). 
