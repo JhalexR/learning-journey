@@ -227,3 +227,24 @@ flowchart LR
 + Códigos de Estado Importantes 
 
 </details>
+
+#### 31/07/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+### Arquitectura de redes
+
++ Topología Estrella -> mas usada actualmente en redes **LAN**
++ Redes **WAN** (_Wide Area Network_) -> Generalmente pertenece a los proveedores de Internet (`ISP`)
++ retardos, pérdidas de paquetes, errores de transmisión existen porque ningún medio físico de transmisión es perfecto
++ **Nyquist** -> calcula la velocidad máxima de transmisión en un canal sin ruido 
+	+ $C = 2BW log₂ M$
+
+##### Tengo que investigar
+
++ comunicación por capas
+
+</details>
