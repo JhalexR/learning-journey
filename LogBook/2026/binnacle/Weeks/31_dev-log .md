@@ -44,3 +44,13 @@
 + IP y puertos
 
 </details>
+
+#### 31/07/2026
+
+<details>
+<summary>expandir</summary>
+
++ Arquitectura de redes -> topología de redes
++ Arquitectura de redes -> **LAN** y **WAN**
+
+</details>
