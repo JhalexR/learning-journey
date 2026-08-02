@@ -28,6 +28,62 @@ D <--> E
 + **Puerto:** indica a qué aplicación
 + **Capa de transporte:** define cómo viajan los datos
 
+### Es importante distinguir dos niveles:
+
++ **IP** entrega un paquete al equipo (`host`) _**˟correcto˟**_.
++ **TCP** o **UDP** entregan ese paquete al programa (`proceso`) _**˟correcto˟**_ dentro del equipo.
+
+```
+Internet
+      │
+      ▼
+Computador
+      │
+ ┌────┴────┐
+ │ Navegador │
+ │ Correo    │
+ │ Spotify   │
+ └───────────┘
+```
+
++ Si llegan datos desde Internet, la capa de transporte decide a cuál de esos programas deben entregarse. 
++ Para ello utiliza los números de puerto.
+
+## Multiplexación y Demultiplexación
+
+Estos son dos conceptos fundamentales de la capa de transporte.
+
+### Multiplexación
+
+Consiste en tomar datos de varios procesos y enviarlos por un mismo canal de comunicación.
+
+```
+Navegador ─┐
+Correo ────┼──► TCP/UDP ─► Internet
+Spotify ───┘
+```
+
+La capa de transporte combina todos esos datos y añade la información necesaria (como los puertos) para diferenciarlos
+
+### Demultiplexación
+
+Es el proceso contrario.
+
+Cuando llegan datos desde Internet, la capa de transporte determina a qué **aplicación pertenecen**.
+
+```
+Internet
+     │
+     ▼
+ TCP/UDP
+     │
+ ┌───┼────────┐
+ ▼   ▼        ▼
+Web Correo Spotify
+```
+
+Esto permite que varios programas utilicen la red al mismo tiempo sin confundirse.
+
 ### Responsabilidades de la capa de transporte
 
 Entre sus principales funciones se encuentran:
@@ -108,6 +164,16 @@ Esta fase inicial permite que ambos extremos preparen la comunicación.
 + Una característica importante de TCP es que el receptor confirma la recepción de los datos.
 + Cada confirmación se conoce como ACK (Acknowledgment).
 
+    + _El número de ACK indica el próximo byte que el receptor espera recibir, no el último byte recibido._
+
+Ejemplo:
+
++ El emisor envía los bytes del 1 al 100.
++ El receptor responde con:
+    + `ACK = 101`
++ Eso significa:
+    + _"He recibido correctamente los bytes hasta el 100 y ahora espero el 101"._ 
+
 ### ¿Qué ocurre si un paquete se pierde?
 
 + Supongamos que el cliente envía tres paquetes.
@@ -123,6 +189,18 @@ Paquete 3 ✔
 + El servidor detecta que falta el paquete 2.
 + Entonces el cliente lo vuelve a enviar.
 + Esto garantiza que la información llegue completa.
+
+### ¿Qué ocurre si se pierde un ACK?
+
+También puede perderse el mensaje de confirmación.
+
+En ese caso:
+
+1. El emisor espera un tiempo (_timeout_).
+2. Si no recibe el `ACK`, retransmite el paquete.
+3. El receptor detecta que es un duplicado gracias al número de secuencia y lo descarta, reenviando la confirmación.
+
+Así **TCP** mantiene la confiabilidad sin entregar datos duplicados a la aplicación.
 
 ### Orden correcto
 
@@ -144,6 +222,82 @@ La aplicación recibe la información exactamente en el orden original.
 + Si un cliente envía 5.000 paquetes por segundo, el servidor podría saturarse.
 + **TCP** incorpora mecanismos para regular la velocidad de envío, evitando que el receptor reciba más información de la que puede procesar.
 
+### ¿Por qué TCP necesita números de secuencia?
+
+Internet no garantiza que los paquetes lleguen:
+
++ en orden
++ una sola vez
++ o siquiera que lleguen.
+
+Por ello TCP asigna un número de secuencia a los datos enviados.
+
+```
+Paquete 1 → Seq = 100
+Paquete 2 → Seq = 200
+Paquete 3 → Seq = 300
+```
+
+Si el receptor recibe los paquetes en otro orden, puede reorganizarlos correctamente usando esos números.
+
+### Handshake de TCP (Three-Way Handshake)
+
+Antes de transmitir datos, TCP establece una conexión mediante tres pasos.
+
+```
+Cliente                 Servidor
+
+SYN  ───────────────►
+
+      ◄──────── SYN + ACK
+
+ACK  ───────────────►
+```
+
+Durante este proceso:
+
++ ambos extremos generan un número de secuencia inicial aleatorio
++ sincronizan esos números
++ la conexión queda lista para transmitir datos.
+
+La aleatoriedad dificulta que un atacante adivine los números de secuencia y manipule la comunicación.
+
+### Ventana TCP (Window)
+
++ Esperar la confirmación de cada paquete antes de enviar el siguiente sería muy ineficiente.
+
++ TCP utiliza una ventana para permitir que haya varios paquetes "en vuelo" al mismo tiempo.
+
++ Existen dos ventanas:
+
+**Ventana de envío**
++ Contiene los bytes enviados que aún no han sido confirmados.
+
+**Ventana de recepción**
++ Indica cuántos datos puede recibir el receptor sin saturarse.
+
+Esto permite implementar el control de flujo, evitando enviar más datos de los que el receptor puede procesar.
+
+## Métodos de retransmisión
+
+### Selective Repeat
+
++ Si un paquete se pierde:
+    + solo se retransmite ese paquete.
+
+**Ventajas:**
++ más eficiente
++ menos tráfico innecesario.
+
+El receptor confirma individualmente cada paquete.
+
+### Go-Back-N
+
+Si un paquete se pierde:
++ el emisor retransmite ese paquete y todos los siguientes enviados después de él.
+
+_Aunque es más simple de implementar, puede generar retransmisiones innecesarias._
+
 **Ventajas de TCP**
 
 + Alta confiabilidad.
@@ -158,6 +312,74 @@ La aplicación recibe la información exactamente en el orden original.
 + Mayor latencia.
 + Más lento debido a las confirmaciones y retransmisiones.
 
+### TCP según la RFC 793
+
+TCP proporciona una comunicación confiable entre procesos y organiza su funcionamiento en varias áreas principales:
+
++ transferencia de datos
++ fiabilidad
++ control de flujo
++ multiplexación
++ manejo de conexiones
++ prioridad y seguridad.
+
+### Transferencia de datos y la función PSH
+
+**TCP** puede almacenar temporalmente datos en un `búfer` antes de enviarlos.
+
+Cuando una aplicación necesita que los datos salgan inmediatamente, puede utilizar la función **PSH** (_Push_), que solicita al módulo **TCP** transmitir el contenido del `búfer` sin esperar más datos.
+
+### Fiabilidad
+
+La confiabilidad de **TCP** se basa en varios mecanismos que trabajan juntos:
+
++ números de secuencia
++ ACK
++ retransmisiones cuando expira el tiempo de espera
++ checksum para detectar corrupción
++ eliminación de duplicados
++ reordenamiento de segmentos.
+
+Gracias a ellos TCP puede recuperar información perdida o desordenada durante la transmisión.
+
+### Multiplexación mediante sockets
+
+Cada conexión TCP se identifica mediante una combinación de cuatro datos:
+
+```java
+(IP origen,
+ Puerto origen,
+ IP destino,
+ Puerto destino)
+```
+
+Esta combinación, conocida como una **tupla de cuatro elementos**, permite que un mismo servidor atienda simultáneamente múltiples clientes sin confundir sus conexiones.
+
+### Indicadores (Flags) de TCP
+
+Existen varios bits de control presentes en la cabecera **TCP**:
+
++ **SYN**: inicia la conexión.
++ **ACK**: confirma la recepción de datos.
++ **FIN**: solicita finalizar la conexión.
++ **PSH**: pide enviar inmediatamente los datos del búfer.
++ **URG**: indica que existen datos urgentes.
++ **RST**: reinicia o aborta una conexión cuando ocurre un error.
+
+Estos indicadores permiten controlar el ciclo de vida de una conexión TCP.
+
+### Verificación de números de secuencia
+
+El receptor solo acepta segmentos cuyos números de secuencia se encuentren dentro de su **ventana de recepción**.
+
+Esto evita aceptar datos:
+
++ duplicados
++ demasiado antiguos
++ fuera del rango esperado.
+
+Si la ventana de recepción tiene tamaño cero, solo deben aceptarse segmentos de confirmación (`ACK`), mientras que los datos normales deberán esperar hasta que la ventana vuelva a abrirse.
+
 ## UDP (User Datagram Protocol)
 
 + UDP sigue una filosofía completamente distinta.
@@ -168,6 +390,14 @@ La aplicación recibe la información exactamente en el orden original.
 
 + El cliente simplemente envía los datos.
 + No pregunta si el servidor está listo ni espera un mensaje de _"recibido"_.
+
++ **UDP** es un protocolo **no orientado a conexión**.
++ Eso significa que **no necesita establecer una conexión antes de enviar datos**.
++ Envía el datagrama y continúa.
+
+Su funcionamiento es simple:
+
+`Emisor ─────────► Receptor`
 
 ### ¿Qué ocurre si un paquete se pierde?
 
@@ -186,6 +416,13 @@ Porque hay aplicaciones donde la velocidad es mucho más importante que la perfe
 
 + Durante una videollamada, si se pierde un fotograma, normalmente el usuario apenas lo nota.
 + Esperar a recuperarlo produciría pausas o congelamientos mucho más molestos.
+
+**Características**
++ No garantiza la entrega.
++ No garantiza el orden.
++ No retransmite paquetes perdidos.
++ Es muy rápido.
++ Usa números de puerto para entregar los datos al proceso correcto.
 
 ### Comparación TCP vs UDP
 
