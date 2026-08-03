@@ -9,3 +9,14 @@
 + ¿Qué es un socket?
 
 </details>
+
+#### 03/08/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Investigué sobre:
+
++ protocolos de aplicación **HTTP - HTTPS**
+
+</details>
