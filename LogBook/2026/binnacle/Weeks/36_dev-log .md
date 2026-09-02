@@ -19,3 +19,18 @@
 + Una reflexión desde una experiencia hospitalaria -> ¿que deberia preguntarse un ingeniero al inicio del desarollo de una solucion de software?
 
 </details>
+
+#### 02/09/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Investigué sobre:
+
++ Una reflexión desde una experiencia hospitalaria 
+    + ¿Que deberia hacer el sistema
+    + ¿Quienes intervienen?
+    + ¿Cómo intervienen?
+    + ¿Cómo fluye la información?
+
+</details>
