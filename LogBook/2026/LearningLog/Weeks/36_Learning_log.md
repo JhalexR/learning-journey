@@ -13,3 +13,22 @@
 + mejorar la investigación y formato del archivo
 
 </details>
+
+#### 01/09/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+### Un ejercicio de pensamiento de ingeniería de software
++ _"...un ingeniero de software no debería empezar pensando: ¿qué aplicación puedo programar?..."_
+
+##### Tengo que investigar
+
++ Entender un sistema antes de diseñarlo
+    + Actores
+    + Información
+    + Flujo de información
+
+</details>
