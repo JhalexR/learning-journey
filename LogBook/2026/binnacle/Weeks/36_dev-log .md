@@ -28,9 +28,35 @@
 ##### Investigué sobre:
 
 + Una reflexión desde una experiencia hospitalaria 
-    + ¿Que deberia hacer el sistema
+    + ¿Que deberia hacer el sistema?
     + ¿Quienes intervienen?
     + ¿Cómo intervienen?
     + ¿Cómo fluye la información?
+
+</details>
+
+#### 03/09/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Investigué sobre:
+
++ Una reflexión desde una experiencia hospitalaria 
+    + Entender el sistema antes de diseñarlo
+    + Actores
+    + Información
+    + Flujo de información
+    + Puntos de coordinación
+    + Posibles puntos de falla
+    + Principios para una posible solución
+    + Interoperabilidad
+    + Fuente única de verdad
+    + Trazabilidad
+    + Información vigente
+    + Responsabilidades claras
+    + Comunicación estructurada
+    + ¿Qué podría hacer el software?
+    + Centralizar información
 
 </details>
