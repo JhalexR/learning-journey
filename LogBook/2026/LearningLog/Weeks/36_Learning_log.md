@@ -48,3 +48,23 @@
     + Flujo de información
 
 </details>
+
+#### 03/09/2026
+
+##### Hoy aprendí
+
+### Un ejercicio de pensamiento de ingeniería de software
++ La información debe estar disponible de manera clara, actualizada y accesible para las personas que realmente la necesitan
++ Entender el flujo de información permite identificar dónde podría ser necesario mejorar la comunicación y la coordinación.
++ La _Interoperabilidad_ permite -> **intercambiar y utilizar información de manera adecuada**
+
+##### Tengo que investigar
+
++ Entender un sistema antes de diseñarlo
+    + Registrar acciones
+        + Gestionar tareas pendientes
+        + Notificar eventos importantes
+        + Mantener historial de cambios
+        + Facilitar la coordinación
+
+</details>
