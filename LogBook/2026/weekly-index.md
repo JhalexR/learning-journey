@@ -46,3 +46,10 @@
 + learning-journey
 
 </details>
+
+### Semana 38
+
+<details>
+<summary> 13 Sep a 19 Sep </summary>
+
++ learning-journey
