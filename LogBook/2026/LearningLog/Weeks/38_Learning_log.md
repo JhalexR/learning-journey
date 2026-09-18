@@ -81,4 +81,12 @@ diferente a -> ❌"muchas alertas" la idea es -> ✔️Eventos relevantes llegue
 
 + Hacer una reflexión final sobre todo el ejercicio
 
+##### P.D.:
+
+#### Reflexión final:
+
+> **Aprender ingeniería de software también significa aprender a mirar los problemas del mundo real con curiosidad, hacer preguntas antes de buscar soluciones y utilizar el conocimiento para intentar construir sistemas que realmente aporten valor a las personas.**
+
+
+
 </details>
