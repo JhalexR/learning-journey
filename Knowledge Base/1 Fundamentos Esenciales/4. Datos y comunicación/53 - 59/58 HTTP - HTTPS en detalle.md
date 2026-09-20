@@ -1238,4 +1238,540 @@ Lo esencial es:
 
 ## Códigos de Estado HTTP
 
+Estos aparecen en la primera línea de una respuesta y permiten saber rápidamente qué ocurrió con la petición.
+
+Cuando un servidor recibe una petición, necesita comunicarle al cliente el resultado.
+
+`HTTP/1.1 200 OK`
+☝️
+Aquí:
+
++ `HTTP/1.1` → versión de HTTP.
++ `200` → código de estado.
++ `OK` → descripción del código.
+
+El código numérico es lo realmente importante.
+
+### 1. Las cinco categorías
+
+Los códigos HTTP tienen tres dígitos y se agrupan según su primer número:
+
+| Código | Categoría          | Significado general                                 |
+| ------ | ------------------ | --------------------------------------------------- |
+| `1xx`  | Informativo        | La solicitud está siendo procesada                  |
+| `2xx`  | Éxito              | La solicitud se procesó correctamente               |
+| `3xx`  | Redirección        | Se requiere otra acción para completar la solicitud |
+| `4xx`  | Error del cliente  | La solicitud tiene algún problema                   |
+| `5xx`  | Error del servidor | El servidor no pudo completar una solicitud válida  |
+
+### 2. Códigos 1xx — Informativos
+
+Los códigos `1xx` indican que el servidor ha recibido la solicitud y proporciona información sobre el estado del procesamiento.
+
+Son menos comunes para un desarrollador que los códigos `2xx`, `4xx` y `5xx`.
+
+### `100 Continue`
+
+Indica que el servidor ha recibido los encabezados iniciales y que el cliente puede continuar enviando el contenido de la petición.
+
+```mermaid
+
+flowchart LR
+
+A(("Cliente"))
+B["¿Puedo continuar?"]
+C(("Servidor"))
+D["100 Continue"]
+E["Envía body"]
+
+A --> B --> C --> D --> E --> A
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+```
+
+### 3. Códigos 2xx — Éxito
+
+Estos indican que la petición fue procesada correctamente.
+
+Los más importantes son:
+
++ `200 OK`
++ `201 Created`
++ `202 Accepted`
++ `204 No Content`
+
+### `200 OK`
+
+Es probablemente el código HTTP que encontrarás con mayor frecuencia.
+
+Significa que la solicitud se procesó correctamente.
+
+Ejemplo:
+
+`GET /usuarios/25 HTTP/1.1`
+
+Respuesta:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 25,
+  "nombre": "Juan"
+}
+```
+
+Significa:
+
+> El servidor procesó correctamente la petición y devuelve el recurso solicitado.
+
+### `201 Created`
+
+Indica que se creó correctamente un nuevo recurso.
+
+Es muy habitual después de un POST.
+
+Por ejemplo:
+
+`POST /usuarios HTTP/1.1`
+
+Respuesta:
+
+```http
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": 26,
+  "nombre": "Ana"
+}
+```
+
+El significado sería:
+
+> El usuario fue creado correctamente.
+
+### `202 Accepted`
+
+Indica que el servidor aceptó la solicitud para procesarla, pero el procesamiento todavía no necesariamente ha terminado.
+
+Es útil para operaciones asíncronas.
+
+Por ejemplo:
+
+```mermaid
+
+flowchart LR
+
+A(("Cliente"))
+B["Solicita generar un informe"]
+C(("Servidor"))
+D["202 Accepted"]
+
+A --> B --> C --> D --> A
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+```
+
+El servidor puede estar generando el informe en segundo plano.
+
+### `204 No Content`
+
+Significa que la operación tuvo éxito pero el servidor no necesita devolver contenido en el cuerpo de la respuesta.
+
+Por ejemplo:
+
++ `DELETE /usuarios/25 HTTP/1.1`
+
+Respuesta: 
+
++ `HTTP/1.1 204 No Content`
+
+No hay un body que devolver.
+
+### 4. Códigos 3xx — Redirecciones
+
+Los códigos 3xx indican que el cliente necesita realizar alguna acción adicional, normalmente siguiendo otra ubicación.
+
+Los más conocidos son:
+
++ `301 Moved Permanently`
++ `302 Found`
++ `304 Not Modified`
++ `307 Temporary Redirect`
++ `308 Permanent Redirect`
+
+### `301 Moved Permanently`
+
+Indica que el recurso se ha trasladado permanentemente a otra URL.
+
+Ejemplo:
+
+```http
+HTTP/1.1 301 Moved Permanently
+Location: https://ejemplo.com/nueva-url
+```
+El navegador puede dirigirse a:
+`https://ejemplo.com/nueva-url`
+
+### `302 Found`
+
+Indica una redirección temporal.
+
+```http
+HTTP/1.1 302 Found
+Location: https://ejemplo.com/temporal
+```
+
+La diferencia conceptual es:
+
++ `301` → cambio permanente
++ `302` → redirección temporal
+
+### `304 Not Modified`
+
+Este código es especialmente interesante cuando hablamos de caché.
+
+Significa que el recurso no ha cambiado desde la versión que el cliente ya tiene almacenada.
+
+Por ejemplo:
+
+```mermaid
+
+flowchart LR
+
+A(("Cliente"))
+B["¿Ha cambiado este archivo?"]
+C(("Servidor"))
+D["304 Not Modified"]
+E["Usa su copia almacenada"]
+
+A --> B --> C --> D --> A --> E
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+```
+
+> Esto permite ahorrar ancho de banda y mejorar el rendimiento.
+
+### 5. Códigos 4xx — Errores del cliente
+
+Aquí encontramos algunos de los códigos más importantes para el desarrollo de aplicaciones.
+
+Los principales son:
+
++ `400 Bad Request`
++ `401 Unauthorized`
++ `403 Forbidden`
++ `404 Not Found`
++ `405 Method Not Allowed`
++ `409 Conflict`
++ `422 Unprocessable Content`
++ `429 Too Many Requests`
+
+### `400 Bad Request`
+
+Significa que el servidor no puede procesar la petición porque está mal formada o contiene datos inválidos según las reglas de la solicitud.
+
+```http
+POST /usuarios HTTP/1.1
+Content-Type: application/json
+
+{
+  "nombre":
+```
+El JSON está incompleto.
+
+El servidor podría responder:
+
+`El servidor podría responder:`
+
+Conceptualmente:
+
+```mermaid
+
+flowchart LR
+
+A(("Cliente"))
+B["Petición incorrecta"]
+C(("Servidor"))
+D["400"]
+
+A --> B --> C --> D 
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+```
+### `401 Unauthorized`
+
+Este código suele indicar que el cliente no está autenticado correctamente para acceder al recurso.
+
+Por ejemplo:
+
+`GET /perfil HTTP/1.1`
+
+pero no proporciona credenciales válidas.
+
+Respuesta:
+
+`HTTP/1.1 401 Unauthorized`
+
+Una forma sencilla de recordarlo:
+
+> 401 → necesito autenticarme.
+
+Aunque el nombre diga `Unauthorized`, en la práctica HTTP `401` está relacionado principalmente con **autenticación**.
+
+### `403 Forbidden`
+
+Aquí el cliente puede estar correctamente autenticado, pero no tiene permiso para realizar esa acción.
+
+Por ejemplo:
+
+```mermaid
+
+flowchart LR
+
+A["Usuario"]
+B["Está autenticado ✔"]
+C["Intenta acceder a recurso administrativo"]
+D["No tiene permisos ✘"]
+E["403 Forbidden"]
+
+A --> B --> C --> D --> E
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+```
+
+Una forma sencilla de distinguirlos:
+
+```
+401 → ¿Quién eres?
+403 → Sé quién eres, pero no tienes permiso.
+```
+
+### `404 Not Found`
+
+Uno de los errores más conocidos.
+
+Significa que el servidor no encontró una representación del recurso solicitado.
+
+Por ejemplo:
+
+`GET /usuarios/999999`
+
+Si ese recurso no existe:
+
+`HTTP/1.1 404 Not Found`
+
+También puede ocurrir: `GET /pagina-que-no-existe -> 404`
+
+### `405 Method Not Allowed`
+
+Indica que el servidor conoce el recurso, pero el método HTTP utilizado no está permitido para ese recurso.
+
+Por ejemplo, una API podría permitir:
+
+`GET /usuarios`
+
+pero no: 
+
+`DELETE /usuarios`
+
+Entonces podría devolver:
+
+`HTTP/1.1 405 Method Not Allowed`
+
+### `409 Conflict`
+
+Indica que existe un conflicto con el estado actual del recurso.
+
+Un ejemplo típico:
+
+```
+Intentar crear usuario
+correo = juan@example.com
+```
+
+Pero ese correo ya existe.
+
+La API podría responder:
+
+`HTTP/1.1 409 Conflict`
+
+El uso exacto depende de las reglas de la API.
+
+### `422 Unprocessable Content`
+
+Indica que el servidor entiende la estructura de la petición, pero no puede procesar el contenido porque no cumple determinadas reglas de validación.
+
+Por ejemplo:
+
+```JSON
+{
+  "edad": -15
+}
+```
+
+El JSON es válido.
+
+Pero la aplicación puede considerar inválida esa edad.
+
+Podría responder:
+
+`HTTP/1.1 422 Unprocessable Content`
+
+Es muy común encontrar este código en APIs para errores de validación.
+
+### `429 Too Many Requests` 
+
+Indica que el cliente ha realizado demasiadas solicitudes en un período determinado.
+
+```mermaid
+
+flowchart LR
+
+A(("Cliente"))
+B["1000 solicitudes"]
+C(("Servidor"))
+D["429 Too Many Requests"]
+
+A --> B --> C --> E
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+```
+
+Esto está relacionado con mecanismos de rate limiting.
+
+Una API puede limitar, por ejemplo:
+
+> 100 solicitudes / minuto
+
+y rechazar temporalmente solicitudes adicionales.
+
+### 6. Códigos 5xx — Errores del servidor
+
+Estos indican que el servidor no pudo completar una solicitud.
+
+Los más importantes son:
+
++ `500 Internal Server Error`
++ `501 Not Implemented`
++ `502 Bad Gateway`
++ `503 Service Unavailable`
++ `504 Gateway Timeout`
+
+### `500 Internal Server Error`
+
+Es un error genérico del servidor.
+
+Por ejemplo:
+
+```
+Cliente
+   │
+   │ GET /usuarios
+   ▼
+Servidor
+   │
+   ├── Error en código
+   ├── Excepción
+   └── Problema inesperado
+   │
+   ▼
+500 Internal Server Error
+```
+
+El problema está del lado del servidor, aunque el código por sí solo no indica cuál fue la causa exacta.
+
+### `502 Bad Gateway`
+
+Este código aparece normalmente cuando un servidor que actúa como gateway o proxy recibe una respuesta inválida de otro servidor.
+
+Se produce Si el proxy recibe una respuesta inválida o inesperada del backend:
+
+Por ejemplo:
+
+```mermaid
+
+flowchart LR
+
+A(("Cliente"))
+B(("Nginx / Proxy"))
+C(("Backend"))
+D["Respuesta problemática"]
+E["502 Bad Gateway"]
+
+A --> B --> C --> D -.-> B -.-> E
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+```
+
+### `503 Service Unavailable`
+
+Significa que el servidor no está disponible para procesar temporalmente la solicitud.
+
+Puede ocurrir por situaciones como:
+
++ mantenimiento
++ sobrecarga 
++ servicio temporalmente no disponible.
+
+Por ejemplo:
+
+`HTTP/1.1 503 Service Unavailable`
+
+### `504 Gateway Timeout`
+
+Aparece cuando un gateway o proxy no recibe a tiempo una respuesta de otro servidor.
+
+Por ejemplo:
+
+```mermaid
+
+flowchart LR
+
+A(("Cliente"))
+B(("Servidor A"))
+D["«...Servidor B No responde a tiempo...»"]
+E(("Servidor B"))
+F["504 Gateway Timeout"]
+
+A --> B 
+B --> F
+B -.-> D 
+D -.-> E 
+E -.-> D
+D -.-> B
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style F fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+```
 
