@@ -1775,3 +1775,42 @@ style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
 style F fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
 ```
 
+### Los códigos a memorizar primero
+
+Para empezar como desarrollador, estos son especialmente importantes:
+
+| Código  | Significado                        |
+| ------- | ---------------------------------- |
+| **200** | OK                                 |
+| **201** | Recurso creado                     |
+| **204** | Éxito sin contenido                |
+| **301** | Redirección permanente             |
+| **302** | Redirección temporal               |
+| **304** | No modificado                      |
+| **400** | Petición incorrecta                |
+| **401** | No autenticado correctamente       |
+| **403** | Sin permisos                       |
+| **404** | Recurso no encontrado              |
+| **405** | Método no permitido                |
+| **409** | Conflicto                          |
+| **422** | Contenido no procesable/validación |
+| **429** | Demasiadas solicitudes             |
+| **500** | Error interno del servidor         |
+| **502** | Error de gateway/proxy             |
+| **503** | Servicio no disponible             |
+| **504** | Tiempo de espera del gateway       |
+
+### Una forma de pensar en los códigos
+
+Cuando aparezca un codigo HTTP mientras se esta desarrollando, se puede empezar por la siguiente pregunta:
+
+> _**¿Con qué número comienza?**_
+
+| Código  |        Significado                        |
+| ------- | ----------------------------------------- |
+| **2xx** | Éxito                                     |
+| **3xx** | Redirección / caché                       |
+| **4xx** | Revisar la petición del cliente           |
+| **5xx** | Investigar el servidor o sus dependencias |
+
+> Esto no significa que todo 4xx sea necesariamente culpa del programador que hizo la petición ni que todo 5xx sea causado por el código de una única aplicación; son categorías que ayudan a localizar dónde está el problema.
