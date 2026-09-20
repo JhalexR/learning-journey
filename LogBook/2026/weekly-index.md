@@ -53,3 +53,12 @@
 <summary> 13 Sep a 19 Sep </summary>
 
 + learning-journey
+
+</details>
+
+### Semana 39
+
+<details>
+<summary> 13 Sep a 19 Sep </summary>
+
++ learning-journey
