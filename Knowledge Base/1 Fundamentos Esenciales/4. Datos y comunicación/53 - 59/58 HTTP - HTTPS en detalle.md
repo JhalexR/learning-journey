@@ -258,6 +258,516 @@ Aunque alguien intercepte los datos, no podrá entender su contenido sin las cla
 
 No solo cifra el contenido, sino que también ayuda a verificar que el cliente se está comunicando con el servidor correcto mediante `certificados digitales`.
 
+## Estructura de una Petición HTTP 
+
+Una petición HTTP (HTTP Request) es el mensaje que un cliente —por ejemplo, un navegador, una aplicación móvil o Postman— envía a un servidor para solicitar información o realizar alguna acción.
+
+Una petición HTTP puede contener:
+
+Línea de petición (Request Line)
+Encabezados (Headers)
+Línea en blanco
+Cuerpo (Body) — opcional
+
+```
+┌──────────────────────────────────────┐
+│ Línea de petición                    │
+├──────────────────────────────────────┤
+│ Headers                              │
+│ Headers                              │
+│ Headers                              │
+├──────────────────────────────────────┤
+│ Línea en blanco                      │
+├──────────────────────────────────────┤
+│ Body (opcional)                      │
+└──────────────────────────────────────┘
+```
+### 1. Línea de petición
+
+La primera línea indica principalmente:
+
++ Método HTTP
++ Recurso solicitado
++ Versión de HTTP
+
+Por ejemplo:
+
+```http
+GET /productos HTTP/1.1
+```
+
+Podemos dividirla:
+
+```http
+GET       /productos       HTTP/1.1
+│              │               │
+│              │               └── Versión
+│              └────────────────── Recurso
+└───────────────────────────────── Método
+```
+
+**Método HTTP** 
+
+El método indica qué quiere hacer el cliente.
+
+Los más importantes son:
+
+| Método   | Propósito                |
+| -------- | ------------------------ |
+| `GET`    | Obtener información      |
+| `POST`   | Enviar/crear información |
+| `PUT`    | Reemplazar un recurso    |
+| `PATCH`  | Modificar parcialmente   |
+| `DELETE` | Eliminar un recurso      |
+
+```http
+GET /productos HTTP/1.1
+```
+
+significa:
+
+> "Quiero obtener el recurso /productos."
+
+mientras:
+```http
+DELETE /productos/25 HTTP/1.1
+```
+> "Quiero eliminar el recurso /productos/25."
+
+### 2. Recurso solicitado
+
+Después del método aparece la ruta (path) del recurso.
+```http
+GET /usuarios/25 HTTP/1.1
+```
+
+La ruta es:
+```http
+/usuarios/25
+```
+
+Esto podría representar:
+> El usuario cuyo identificador es 25.
+
+**Ruta + parámetros**
+
+Una petición también puede incluir parámetros en la URL.
+```http
+GET /productos?categoria=computadores&orden=precio HTTP/1.1
+```
+
+Aquí tenemos:
+```
+Ruta:
+ /productos
+
+Parámetros:
+ categoria=computadores
+ orden=precio
+```
+Estos parámetros reciben el nombre de **query parameters.**
+> Son muy comunes al trabajar con APIs.
+
+### 3. Versión HTTP
+
+```http
+HTTP/1.1
+```
+
+Esto indica la versión del protocolo utilizada para esa petición.
+
+Históricamente encontramos:
++ HTTP/1.0 
++ HTTP/1.1
++ HTTP/2
++ HTTP/3
+
+**En HTTP/1.1**
++ la petición se representa de forma textual
+
+**HTTP/2 y HTTP/3**
++ utilizan representaciones binarias más eficientes
+
+> cuando estudias la estructura de una petición, normalmente se utiliza HTTP/1.1 como ejemplo porque permite visualizar claramente sus componentes.
+
+### 4. Headers
+
+Después de la línea de petición vienen los _**headers (encabezados).**_
+
+Los headers proporcionan información adicional sobre la petición.
+
+```http
+Host: ejemplo.com
+User-Agent: Mozilla/5.0
+Accept: text/html
+Authorization: Bearer abc123
+```
+
+Cada header tiene esta estructura _**Nombre: Valor:**_
+
+Ejemplo: Content-Type: application/json
+
+```http
+Nombre:
+Content-Type
+
+Valor:
+application/json
+```
+**¿Para qué sirven los Headers?**
+
+Los headers permiten comunicar información adicional entre cliente y servidor.
+
+Pueden indicar:
+
++ ¿Qué tipo de contenido se solicita?
++ ¿Qué formato puede recibir el cliente?
++ ¿Qué tipo de datos se están enviando?
++ Información sobre autenticación
++ Información sobre caché
++ Cookies
++ Información del navegador
++ Información de compresión
++ Información relacionada con el idioma
+
+### Headers importantes
+
+### `Host`
+
+Indica el dominio al que está dirigida la petición.
+
+```http
+Host: www.ejemplo.com
+```
+
+Es especialmente importante en HTTP/1.1 porque permite que un mismo servidor atienda múltiples dominios.
+
+```
+Servidor
+   │
+   ├── ejemplo.com
+   ├── tienda.com
+   └── api.com
+```
+> Todos podrían utilizar la misma dirección IP, pero el `Host` permite indicar cuál de esos sitios se está solicitando.
+
+### `User-Agent`
+
+Indica información sobre el cliente que realiza la petición.
+
+```http
+User-Agent: Mozilla/5.0
+```
+
+Puede proporcionar información sobre:
+
++ Navegador
++ Sistema operativo
++ Motor del navegador
++ Dispositivo
+
+Por ejemplo, un servidor podría recibir una petición proveniente de Chrome en Windows o de Safari en un iPhone.
+
+### `Accept`
+
+Indica qué tipos de contenido puede procesar o prefiere recibir el cliente.
+
+```http
+Accept: text/html
+```
+> El cliente está indicando que acepta contenido HTML.
+
+También puede aparecer:
+
+```http
+Accept: application/json
+```
+> Muy común cuando trabajamos con _**APIs.**_
+
+### `Content-Type`
+
+Indica qué tipo de contenido estamos enviando en el cuerpo de la petición.
+
+```http
+Content-Type: application/json
+```
+
+significa que el cuerpo contiene JSON:
+
+```JSON
+{
+  "nombre": "Juan",
+  "edad": 25
+}
+```
+
+Otro caso:
+
+```http
+Authorization: Bearer eyJhbGciOi...
+```
+
+Esto es común cuando una aplicación utiliza tokens para autenticar solicitudes a una API.
+
+Importante: un token de autenticación es información sensible y no debería compartirse públicamente.
+
+### `Cookie`
+
+El navegador puede enviar cookies al servidor:
+
+```http
+Cookie: sessionId=abc123
+```
+
+Esto permite, por ejemplo, que el servidor reconozca una sesión existente.
+
+### 5. Línea en blanco
+
+Después de los headers existe una línea vacía.
+
+Esto es importante porque **marca el final de los encabezados.**
+
+```http
+GET /productos HTTP/1.1
+Host: ejemplo.com
+Accept: application/json
+Authorization: Bearer abc123
+                            <- linea vacia
+```
+
+La línea vacía indica:
+
+> "Ya terminaron los headers."
+
+Si existe un cuerpo, comienza después de esa línea.
+
+### 6. Body
+
+El body _(cuerpo)_ contiene los datos que el cliente quiere enviar al servidor.
+
+No todas las peticiones tienen _body_.
+
+Por ejemplo, normalmente un `GET` no necesita enviar un cuerpo.
+
+Pero un `POST` frecuentemente sí.
+
+```http
+</>
+POST /usuarios HTTP/1.1
+Host: api.ejemplo.com
+Content-Type: application/json
+
+{
+  "nombre": "Juan",
+  "correo": "juan@example.com"
+}
+```
+
+Aquí:
+
+```http POST /usuarios HTTP/1.1``` 👈 son la linea de petición
+
+```http Host: ... Content-Type: ...``` 👈 son headers.
+
+Y esta parte👇 es el body. 
+```JSON
+{
+  "nombre": "Juan",
+  "correo": "juan@example.com"
+}
+```
+## Petición HTTP completa
+
+Una petición HTTP/1.1 podría verse así:
+
+```http
+POST /usuarios HTTP/1.1
+Host: api.ejemplo.com
+Content-Type: application/json
+Accept: application/json
+Authorization: Bearer abc123
+User-Agent: Mozilla/5.0
+
+{
+  "nombre": "Juan",
+  "correo": "juan@example.com"
+}
+```
+Otra respresentación visual podría ser:
+```
+┌─────────────────────────────────────────────┐
+│ POST /usuarios HTTP/1.1                     │
+│                                             │
+│ Host: api.ejemplo.com                       │
+│ Content-Type: application/json              │
+│ Accept: application/json                    │
+│ Authorization: Bearer abc123                │
+│ User-Agent: Mozilla/5.0                     │
+│                                             │
+│                                             │ ← Línea vacía
+│ {                                           │
+│   "nombre": "Juan",                         │
+│   "correo": "juan@example.com"              │
+│ }                                           │
+└─────────────────────────────────────────────┘
+```
+
+**¿Qué está ocurriendo aquí? ⬆️**
+
+El cliente está diciendo:
+> "Quiero crear un usuario en /usuarios. Estoy enviando los datos en formato JSON y espero recibir una respuesta JSON."
+
+El servidor recibe la petición y puede:
+
+1. Validar los datos.
+2. Verificar la autenticación.
+3. Aplicar las reglas de negocio.
+4. Guardar el usuario en una base de datos.
+5. Construir una respuesta `HTTP`.
+
+Por ejemplo:
+
+```
+Cliente
+   │
+   │ POST /usuarios
+   │
+   │ JSON
+   ▼
+Servidor
+   │
+   ├── Autenticación
+   ├── Validación
+   ├── Lógica de negocio
+   └── Base de datos
+   │
+   ▼
+Respuesta HTTP
+```
+
+### ¿Qué diferencia hay entre URL y HTTP Request?
+
+Es importante no confundirlos.
+
+Una URL puede ser:
+
+`https://api.ejemplo.com/usuarios/25`
+
+Mientras que la petición HTTP podría ser:
+
+```http
+GET /usuarios/25 HTTP/1.1
+Host: api.ejemplo.com
+Accept: application/json
+```
+La URL indica qué recurso queremos localizar.
+
+La petición `HTTP` contiene además información sobre cómo queremos interactuar con ese recurso.
+
+## ¿Qué pasa con HTTPS?
+
+Cuando utilizas:
+
+`https://`
+
+la estructura lógica de la petición sigue existiendo:
++ Método
++ Ruta
++ Headers
++ Body
+
+pero la comunicación se protege mediante `TLS`.
+
+De forma simplificada:
+
+```mermaid
+
+flowchart LR
+
+A["HTTP"]
+B["TLS"]
+C["TCP / QUIC"]
+D["IP"]
+
+A --> B --> C --> D
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+```
+
+Por eso, si alguien intercepta una comunicación `HTTPS` correctamente protegida, no debería poder leer directamente los _**headers y body `HTTP`**_ que viajan dentro de ella.
+
+Supongamos que una aplicación tiene:
+
+`POST https://api.ejemplo.com/login`
+
+El cliente podría enviar:
+
+```http
+
+POST /login HTTP/1.1
+Host: api.ejemplo.com
+Content-Type: application/json
+Accept: application/json
+
+{
+  "email": "juan@example.com",
+  "password": "********"
+}
+```
+
+El servidor recibe los datos y verifica las credenciales.
+
+Posteriormente enviará una **respuesta `HTTP`**, que estudiaremos en el siguiente tema.
+
+**Resumen visual**
+
+```
+              PETICIÓN HTTP
+                    │
+       ┌────────────┴────────────┐
+       │                         │
+       ▼                         ▼
+  Request Line                Headers
+       │                         │
+       ├── Método                ├── Host
+       ├── Ruta                  ├── Content-Type
+       └── Versión               ├── Authorization
+                                 └── ...
+                    │
+                    ▼
+              Línea vacía
+                    │
+                    ▼
+              Body (opcional)
+```
+
+Lo esencial:
+
+> Una petición `HTTP` indica qué recurso quiere utilizar el cliente, qué operación quiere realizar, proporciona información adicional mediante **headers** y, cuando es necesario, envía datos en el **body.**
+
+Ejemplo:
+
+```http
+POST /usuarios HTTP/1.1
+Host: api.ejemplo.com
+Content-Type: application/json
+
+{
+  "nombre": "Juan"
+}
+```
+
++ `POST` → acción.
++ `/usuarios` → recurso.
++ `HTTP/1.1` → versión.
++ `Host` → servidor solicitado.
++ `Content-Type` → formato del body.
++ `Línea vacía` → separa headers del body.
++ `JSON` → datos enviados al servidor.
+
 ### Ideas clave
 
 + **HTTP** es el protocolo de aplicación utilizado para la comunicación entre clientes y servidores web.
