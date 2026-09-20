@@ -768,6 +768,467 @@ Content-Type: application/json
 + `Línea vacía` → separa headers del body.
 + `JSON` → datos enviados al servidor.
 
+## Estructura de una Respuesta HTTP
+
+> ¿Cómo responde el servidor a esa petición?
+
+**La estructura de una respuesta HTTP es muy importante porque te permitirá entender posteriormente los códigos de estado, las APIs, los errores HTTP y las herramientas de diagnóstico.**
+
+Una respuesta `HTTP` (`HTTP Response`) es el mensaje que el servidor envía al cliente después de recibir y procesar una petición.
+
+```mermaid
+
+flowchart LR
+
+A(("Cliente"))
+B(("Servidor"))
+
+A --> C["Petición HTTP"] --> B --> D["Respuesta HTTP"] --> A
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#fff;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#fff;
+```
+
+Una respuesta HTTP está compuesta principalmente por:
+
+1. Línea de estado (Status Line)
+2. Headers
+3. Línea en blanco
+4. Body (opcional)
+
+```
+┌──────────────────────────────────────┐
+│ Línea de estado                      │
+├──────────────────────────────────────┤
+│ Headers                              │
+│ Headers                              │
+│ Headers                              │
+├──────────────────────────────────────┤
+│ Línea en blanco                      │
+├──────────────────────────────────────┤
+│ Body (opcional)                      │
+└──────────────────────────────────────┘
+```
+
+### 1. Línea de estado
+
+La primera línea de una respuesta HTTP indica el resultado de la petición.
+
+`HTTP/1.1 200 OK`
+
+Podemos dividirla:
+```
+HTTP/1.1     200       OK
+   │           │        │
+   │           │        └── Descripción
+   │           └─────────── Código de estado
+   └─────────────────────── Versión HTTP
+```
+
+**La parte más importante es el código de estado.**
+> Estos códigos indican al cliente qué ocurrió con la solicitud.
+
+### 2. Códigos de estado HTTP
+
+Los códigos están organizados en cinco grandes categorías:
+
+| Rango | Categoría          | Significado                           |
+| ----- | ------------------ | ------------------------------------- |
+| `1xx` | Informativos       | La solicitud está siendo procesada    |
+| `2xx` | Éxito              | La solicitud se procesó correctamente |
+| `3xx` | Redirección        | Se necesita otra acción o ubicación   |
+| `4xx` | Error del cliente  | Hay un problema con la solicitud      |
+| `5xx` | Error del servidor | El servidor no pudo procesarla        |
+
+### 3. Headers de la respuesta
+
+Después de la línea de estado aparecen los headers.
+
+Estos proporcionan información adicional sobre la respuesta.
+
+```http
+Content-Type: application/json
+Content-Length: 128
+Cache-Control: max-age=3600
+Set-Cookie: sessionId=abc123
+```
+
+**Al igual que en las peticiones, tienen esta estructura:**
+
+### Headers importantes
+
+### `Content-Type`
+
+Indica qué tipo de contenido contiene el body.
+
++ `Content-Type: text/html` -> La respuesta contiene HTML.
++ `Content-Type: application/json`-> La respuesta contiene JSON.
++ `Content-Type: image/png` -> para una imagen PNG.
+
+### `Content-Length`
+
+Indica el tamaño del contenido de la respuesta, expresado en bytes, cuando aplica a ese mensaje.
+
++ `Content-Length: 1250` -> significa que el contenido tiene 1250 bytes.
+
+### `Location`
+
+Se utiliza principalmente cuando el servidor quiere indicar otra ubicación.
+
+```http
+HTTP/1.1 301 Moved Permanently
+Location: https://www.ejemplo.com/nueva-pagina
+```
+
+> El navegador puede utilizar esa información para dirigirse a la nueva URL.
+
+### `Set-Cookie`
+
+Permite que el servidor solicite al cliente que almacene una cookie.
+
+`Set-Cookie: sessionId=abc123` 
+
++ El navegador puede almacenar esa cookie y enviarla posteriormente en las solicitudes correspondientes.
++ Esto permite implementar mecanismos como sesiones de usuario.
+
+### `Cache-Control`
+
+Indica reglas relacionadas con el almacenamiento en caché.
+
+`Cache-Control: max-age=3600`
+
++ indica, de forma simplificada, que el recurso puede considerarse fresco durante un período determinado.
++ La caché es importante porque evita solicitar nuevamente recursos que todavía pueden reutilizarse.
+
+### 4. Línea en blanco
+
+Después de los headers aparece una línea vacía:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+Content-Length: 42
+
+{"nombre":"Juan","edad":25}
+``` 
+La línea vacía separa: `Headers` de `Body` -> Es exactamente la misma idea que vimos en las peticiones **HTTP.**
+
+### 5. Body
+
+El body contiene los datos que el servidor devuelve al cliente.
+
+No todas las respuestas tienen body.
+
+Por ejemplo, una respuesta puede contener:
+
++ HTML
++ JSON
++ XML
++ imágenes
++ archivos
++ texto
++ otros tipos de contenido
+
+### Ejemplo de respuesta HTML
+
+solictud HTTP
+```http
+GET /index.html HTTP/1.1
+Host: ejemplo.com
+```
+
+**El servidor podría responder:**
+```http
+HTTP/1.1 200 OK
+Content-Type: text/html
+Content-Length: 48
+
+<html>
+  <body>
+    <h1>Hola</h1>
+  </body>
+</html>
+```
+**Línea de estado**
+
++ `HTTP/1.1 200 OK`
+
+**Headers**
++ `Content-Type: text/html`
++ `Content-Length: 48`
+
+**body.**
+```HTML
+<html>
+  <body>
+    <h1>Hola</h1>
+  </body>
+</html>
+```
+### Ejemplo de respuesta JSON
+
+**Las APIs suelen devolver datos en formato JSON.**
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 25,
+  "nombre": "Juan",
+  "activo": true
+}
+```
++ `200` -> indica que la solicitud fue procesada correctamente
++ `application/json` -> indica que el contenido está en formato JSON.
+
+> Y el JSON contiene los datos que la aplicación cliente necesita.
+
+### Ejemplo de error
+
+`GET /usuarios/9999` 
+
+pero ese usuario no existe.
+
+El servidor podría responder:
+
+```http
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+  "error": "Usuario no encontrado"
+}
+```
+Tenemos:
+
++ `404` → código de estado
++ `Not Found` → descripción.
++ `application/json` → formato del contenido.
++ ```JSON {  "error": "Usuario no encontrado"} ``` → información adicional para el cliente.
+
+### Petición y respuesta juntas
+
+**Petición**
+
+```http
+POST /usuarios HTTP/1.1
+Host: api.ejemplo.com
+Content-Type: application/json
+
+{
+  "nombre": "Juan"
+}
+```
+**Servidor**
+
+```mermaid
+
+flowchart LR
+
+A(("Recibe petición"))
+B["Valida datos"]
+C["Aplica lógica de negocio"]
+D["Guarda usuario"]
+E(("Genera respuesta"))
+
+A --> B --> C --> D --> E
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+```
+
+**Respuesta**
+```http
+HTTP/1.1 201 Created
+Content-Type: application/json
+
+{
+  "id": 25,
+  "nombre": "Juan"
+}
+```
+> El cliente recibe la respuesta y puede utilizar esos datos.
+
+### Petición vs. Respuesta
+
+| Petición HTTP   | Respuesta HTTP  |
+| --------------- | --------------- |
+| Request Line    | Status Line     |
+| Headers         | Headers         |
+| Línea en blanco | Línea en blanco |
+| Body opcional   | Body opcional   |
+
+```mermaid
+
+flowchart LR
+
+A(("CLIENT"))
+B["REQUEST"]
+C(("SERVER"))
+D["RESPONSE"]
+
+A --> B --> C --> D --> A
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
+```
+
+> _**«La diferencia fundamental está en la primera línea.»**_
+
+| HTTP           | Primera Linea           |  Objetivo                    | 
+| ---------------| ------------------------|------------------------------|
+| Petición HTTP  | `GET /usuarios HTTP/1.1`| Qué quiere hacer el cliente. |
+| Respuesta HTTP | `HTTP/1.1 200 OK`       | Qué ocurrió con la petición. |
+
+### Un ejemplo completo
+
+Imaginemos que una aplicación quiere obtener información de un usuario.
+
+### 1. Cliente → Servidor
+
+```http
+GET /api/usuarios/25 HTTP/1.1
+Host: api.ejemplo.com
+Accept: application/json
+Authorization: Bearer token123
+```
+
+El cliente está diciendo:
+
+> _Quiero obtener el usuario 25 y espero recibir JSON._
+
+### 2. Servidor procesa
+
+```mermaid
+
+flowchart LR
+
+A["Petición"]
+B["Autenticación"]
+C["Autorización"]
+D["Consulta base de datos"]
+E["Usuario encontrado"]
+F["Construir respuesta"]
+
+A --> B --> C --> D --> E --> F 
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+style F fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc48;
+```
+
+### 3. Servidor → Cliente
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+
+{
+  "id": 25,
+  "nombre": "Juan",
+  "correo": "juan@example.com"
+}
+```
+
+El cliente recibe los datos.
+
+### ¿Qué ocurre si algo sale mal?
+
+> Aquí aparecen los códigos de estado HTTP.
+
+```
+200 → Todo salió correctamente
+201 → Se creó un recurso
+400 → Petición incorrecta
+401 → No autenticado
+403 → No autorizado
+404 → Recurso no encontrado
+500 → Error interno del servidor
+```
+> _**Estos códigos son extremadamente importantes para los desarrolladores porque permiten saber rápidamente qué ocurrió.**_
+
+**Por ejemplo, una aplicación podría recibir:**
+
++ `HTTP/1.1 401 Unauthorized` y entonces saber: -> _**"Necesito autenticar al usuario."**_
++ ó
++ `HTTP/1.1 404 Not Found` -> _indica que el recurso solicitado no fue encontrado._
+
+### Algo muy importante: HTTP no es solamente HTML
+
+Cuando comenzamos a estudiar HTTP es común pensar:
+
+> HTTP sirve para obtener páginas web.
+
+Pero actualmente HTTP se utiliza para muchísimo más.
+
+Ejemplos:
+
++ Navegador -> API -> JSON
++ Una aplicación móvil puede comunicarse con un backend: 
+    + Aplicación `móvil` -> `HTTPS` -> `API` -> `Base de datos`
+    + Y recibir:
+
+    ```JSON
+    {
+  "usuario": "Juan",
+  "saldo": 150000
+    }
+    ```
+    + No hay necesariamente una página HTML involucrada.
+
+Por eso HTTP es fundamental para las APIs, aplicaciones móviles, sistemas distribuidos y arquitecturas modernas.
+
+### Resumen visual
+
+```
+              RESPUESTA HTTP
+                    │
+       ┌────────────┴────────────┐
+       │                         │
+       ▼                         ▼
+ Status Line                  Headers
+       │                         │
+       ├── Versión               ├── Content-Type
+       ├── Código                ├── Content-Length
+       └── Descripción           ├── Cache-Control
+                                 └── ...
+                    │
+                    ▼
+               Línea vacía
+                    │
+                    ▼
+               Body (opcional)
+```
+
+Ejemplo:
+
+```http
+HTTP/1.1 200 OK
+Content-Type: application/json
+Cache-Control: max-age=3600
+
+{
+  "id": 25,
+  "nombre": "Juan"
+}
+```
+
+Lo esencial es:
+
+> Una respuesta HTTP le indica al cliente qué ocurrió con su petición, proporciona información adicional mediante headers y, cuando corresponde, devuelve datos en el body.
+
+
 ### Ideas clave
 
 + **HTTP** es el protocolo de aplicación utilizado para la comunicación entre clientes y servidores web.
