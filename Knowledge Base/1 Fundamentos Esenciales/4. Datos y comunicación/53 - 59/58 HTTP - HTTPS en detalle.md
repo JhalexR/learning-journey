@@ -1814,3 +1814,120 @@ Cuando aparezca un codigo HTTP mientras se esta desarrollando, se puede empezar 
 | **5xx** | Investigar el servidor o sus dependencias |
 
 > Esto no significa que todo 4xx sea necesariamente culpa del programador que hizo la petición ni que todo 5xx sea causado por el código de una única aplicación; son categorías que ayudan a localizar dónde está el problema.
+
+### Ejemplo práctico con una API
+
+`GET /api/productos/25`
+
+| **Podrías recibir:**                      | **Significado**                     |
+| ------------------------------------------| ------------------------------------|
+| Producto encontrado                       | `HTTP/1.1 200 OK`                   |
+| Producto no existe                        | `HTTP/1.1 404 Not Found`            |
+| No estás autenticado                      | `HTTP/1.1 401 Unauthorized`         |
+| Estás autenticado pero no tienes permiso  | `HTTP/1.1 403 Forbidden`            |
+| El servidor tiene un problema             | `HTTP/1.1 500 Internal Server Error`|
+
+_**El endpoint es el mismo, pero el resultado de la operación es diferente.**_
+
+### Algo importante: código HTTP ≠ error siempre
+
+No todos los códigos HTTP representan errores.
+
+Por ejemplo:
+
+`304 → el recurso no ha cambiado`
+
+> Por eso es mejor pensar en ellos como indicadores del resultado de la interacción HTTP, no simplemente como "códigos de error".
+
+### Relación con la respuesta HTTP
+
+Es importante aprender a interpretar completamente la primera línea:
+
+Por ejemplo:
+
+`HTTP/1.1 404 Not Found`
+
+Sabemos que:
+
++ `HTTP/1.1` -> Versión
++ `404` -> Código de estado
++ `Not Found` -> Descripción
+
+después vienen los headers:
+
+`Content-Type: application/json`
+
+y, opcionalmente, el body
+
+```http
+{
+  "error": "Producto no encontrado"
+}
+```
+Por tanto, una respuesta completa puede verse así:
+
+```http
+HTTP/1.1 404 Not Found
+Content-Type: application/json
+
+{
+  "error": "Producto no encontrado"
+}
+```
+
+### Mapa mental
+
+```
+                 HTTP STATUS CODES
+                        │
+        ┌───────────────┼───────────────┐
+        │               │               │
+       2xx             3xx             4xx
+        │               │               │
+      Éxito       Redirección     Error cliente
+        │               │               │
+    200 OK           301             400
+    201 Created      302             401
+    204 No Content   304             403
+                                    404
+                                    405
+                                    409
+                                    422
+                                    429
+        │
+        │
+       5xx
+        │
+  Error servidor
+        │
+       500
+       502
+       503
+       504
+```
+
+**Lo fundamental**
+
+Codigos a memorizar primero:
+
+```
+200 → OK
+201 → Creado
+204 → Éxito sin contenido
+
+301/302 → Redirección
+
+400 → Petición incorrecta
+401 → Autenticación requerida/incorrecta
+403 → Sin permisos
+404 → No encontrado
+405 → Método no permitido
+409 → Conflicto
+422 → Validación/contenido no procesable
+429 → Demasiadas solicitudes
+
+500 → Error interno
+502 → Bad Gateway
+503 → Servicio no disponible
+504 → Gateway Timeout
+```
