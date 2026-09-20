@@ -258,6 +258,14 @@ Aunque alguien intercepte los datos, no podrá entender su contenido sin las cla
 
 No solo cifra el contenido, sino que también ayuda a verificar que el cliente se está comunicando con el servidor correcto mediante `certificados digitales`.
 
+### Ideas clave
+
++ **HTTP** es el protocolo de aplicación utilizado para la comunicación entre clientes y servidores web.
++ Funciona mediante un modelo de **petición → respuesta**.
++ Es un protocolo sin estado (_stateless_), por lo que cada petición es independiente.
++ Los métodos **HTTP** indican la acción que el cliente desea realizar (**GET, POST, PUT, PATCH y DELETE**).
++ **HTTPS** añade una capa de seguridad (_TLS_) sobre **HTTP**, proporcionando confidencialidad e integridad de los datos durante la comunicación.
+
 ## Estructura de una Petición HTTP 
 
 Una petición HTTP (HTTP Request) es el mensaje que un cliente —por ejemplo, un navegador, una aplicación móvil o Postman— envía a un servidor para solicitar información o realizar alguna acción.
@@ -1228,11 +1236,6 @@ Lo esencial es:
 
 > Una respuesta HTTP le indica al cliente qué ocurrió con su petición, proporciona información adicional mediante headers y, cuando corresponde, devuelve datos en el body.
 
+## Códigos de Estado HTTP
 
-### Ideas clave
 
-+ **HTTP** es el protocolo de aplicación utilizado para la comunicación entre clientes y servidores web.
-+ Funciona mediante un modelo de **petición → respuesta**.
-+ Es un protocolo sin estado (_stateless_), por lo que cada petición es independiente.
-+ Los métodos **HTTP** indican la acción que el cliente desea realizar (**GET, POST, PUT, PATCH y DELETE**).
-+ **HTTPS** añade una capa de seguridad (_TLS_) sobre **HTTP**, proporcionando confidencialidad e integridad de los datos durante la comunicación.
