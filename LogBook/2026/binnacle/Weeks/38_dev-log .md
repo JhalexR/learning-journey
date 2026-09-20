@@ -3,7 +3,7 @@
 
 #### 17/09/2026
 
-##### Hoy aprendí
+##### Investigue sobre
 
 ### Un ejercicio de pensamiento de ingeniería de software
 + ¿Qué podría hacer el software?
