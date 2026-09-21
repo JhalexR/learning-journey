@@ -51,3 +51,29 @@
 + CORS (Cross-Origin Resource Sharing)
 
 </details>
+
+
+</details>
+
+#### 21/09/2026
+
+##### Hoy aprendí
+
+### CORS — Cross-Origin Resource Sharing
++ Un navegador no permite libremente que una página web lea respuestas provenientes de cualquier origen. CORS es un mecanismo de seguridad de los navegadores que controla cuándo una página web puede realizar solicitudes a un servidor
++ ¿qué es un Origin?
+```
+          	ORIGIN
+               │
+     ┌─────────┼──────┐
+     │         │      │
+  Protocolo  Host   Puerto
+```
++ Si cualquiera de estos cambia, tenemos un origen diferente.
+
+### Same-Origin Policy (SOP)
++ Es una política de seguridad restringe cómo una aplicación puede interactuar con recursos de otro origen.
++ **CORS** es principalmente una restricción aplicada por el navegador al acceso de una página a una respuesta cross-origin.
++ CORS no reemplaza HTTP.
+
+</details>
