@@ -16,3 +16,20 @@
 + CORS (Cross-Origin Resource Sharing)
 
 </details>
+
+</details>
+
+#### 21/09/2026
+
+##### Investigue sobre
+
+### CORS (Cross-Origin Resource Sharing)
++ ¿qué es un Origin?
++ Errores CORS comunes
+
+##### Tengo que investigar
+
++ HTTPS y Seguridad 
++ Herramientas de Diagnóstico
+
+</details>
