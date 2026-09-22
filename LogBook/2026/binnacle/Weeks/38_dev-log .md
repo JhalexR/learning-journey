@@ -1,5 +1,5 @@
 
-</details>
+<details>
 <summary>expandir</summary>
 
 #### 17/09/2026
