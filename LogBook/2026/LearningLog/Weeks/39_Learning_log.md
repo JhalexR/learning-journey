@@ -77,3 +77,217 @@
 + CORS no reemplaza HTTP.
 
 </details>
+
+#### 22/09/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+### HTTPS Y seguridad
+
++ `HTTPS` -> `HTTP` + `TLS`
++ `HHTPS` y Confidencialidad
++ `HHTPS` e Integridad 
++ `HHTPS` y Autenticidad
++ TLS (Transport Layer Security) -> es el protocolo criptográfico que proporciona la seguridad utilizada por HTTPS.
++ **Man-in-the-Middle (_MITM_)** ocurre cuando un atacante intenta colocarse entre dos participantes de una comunicación.
+	+ TLS utiliza criptografía y certificados para dificultar este tipo de ataque.
+
++ `HTTP` es un Protocolo de aplicación
++ `TLS` se encarga de la Seguridad de la comunicación
++ `TCP` es una capa de Transporte
+
++ Un certificado digital permite asociar una identidad, como un dominio, con una clave pública.
++ ¿Quién emite los certificados? -> _Certificate Authorities (CA)_ -> El navegador dispone de una lista de autoridades de certificación en las que confía.
++ Cadena de certificados
+```
+Root CA
+   │
+   ▼
+Intermediate CA
+   │
+   ▼
+Certificado del sitio
+   │
+   ▼
+ejemplo.com
+```
++ ¿Qué ocurre cuando visitas HTTPS?
+
+```
+1. Cliente
+      │
+      │ Solicita conexión segura
+      ▼
+2. Servidor
+      │
+      │ Presenta certificado
+      ▼
+3. Cliente
+      │
+      │ Verifica certificado
+      ▼
+4. Se establece TLS
+      │
+      ▼
+5. Se establecen claves de sesión
+      │
+      ▼
+6. HTTP protegido
+```
+
++ **TLS Handshake** 
+
+```mermaid
+sequenceDiagram
+    participant C as 💻 Cliente
+    participant S as 🖥️ Servidor
+
+    C->>S: ClientHello
+    S-->>C: ServerHello
+    S-->>C: Certificado
+    C->>S: Información criptográfica
+    S-->>C: Conexión establecida
+
+    Note over C,S: 🔒 HTTP cifrado
+```
+
++ Criptografía asimétrica y simétrica
++ Criptografía asimétrica 
+```
+        Claves
+          │
+      ┌───┴───┐
+      ▼       ▼
+   Pública  Privada
+      |        |
+      ▼        ▼
+    puede      debe 
+compartirse    mantenerse 
+		protegida
+
+```
+
++ Criptografía simétrica
+```
+Handshake
+    ↓
+Criptografía asimétrica / intercambio seguro
+    ↓
+Establecimiento de claves
+    ↓
+Clave de sesión
+    ↓
+Cifrado simétrico de los datos
+```
+
++ HTTPS principalmente cifra:
++ `HTTP Request -> Headers -> Body`
++ `HTTP Response -> Headers -> Body`
+
++ `HTTPS` Protege la comunicación, pero no corrige vulnerabilidades en el código del servidor.
+
++ Son conceptos diferentes:
+| Concepto           | Primera Línea              |
+| -------------------| ---------------------------|
+| HTTPS:             | Protege la comunicación    | 
+| Autenticación:     | Determina quién eres       | 
+| Autorización:      | Determina qué puedes hacer | 
+
++ 🔒 `https://ejemplo.com` ->  el candado significa que ' La conexión HTTPS/TLS cumple las condiciones de seguridad que el navegador pudo verificar' 
+
++ HTTP Strict Transport Security — HSTS -> Permite que un sitio indique al navegador que debe utilizar HTTPS para ese dominio.
+
++ HTTPS y su relación con los certificados: 
+
+```
+HTTPS
+  │
+  └── utiliza TLS
+          │
+          ├── Cifrado
+          ├── Integridad
+          └── Autenticación del servidor
+                    │
+                    ▼
+             Certificado digital
+                    │
+                    ▼
+              Autoridad de
+              Certificación
+```
+
++ Lo esencial de la lección 
+
+```
+                         HTTPS
+                           │
+                           ▼
+                          TLS
+                           │
+             ┌─────────────┼─────────────┐
+             ▼             ▼             ▼
+      Confidencialidad  Integridad   Autenticidad
+             │                           │
+             │                           ▼
+             │                      Certificado
+             │                           │
+             │                           ▼
+             │                         CA
+             │
+             ▼
+       Datos protegidos
+       durante el tránsito
+```
+
++ 27. ¿Cómo se relaciona con los conceptos anteriores?
+
+```
+                   WEB
+                    │
+                    ▼
+              HTTP / HTTPS
+                    │
+          ┌─────────┴─────────┐
+          ▼                   ▼
+       Request              Response
+          │                   │
+          └─────────┬─────────┘
+                    ▼
+             Status Codes
+                    │
+                    ▼
+                  CORS
+                    │
+                    ▼
+              Seguridad
+                    │
+          ┌─────────┼─────────┐
+          ▼         ▼         ▼
+        TLS     Certificados  HSTS
+          │
+          ▼
+      Cifrado
+      Integridad
+      Autenticidad
+```
+### Herramientas de Diagnóstico
+
++ Las herramientas de diagnóstico permiten descubrir dónde está fallando una comunicación: en tu equipo, en la red, en DNS, en el transporte, en HTTP/HTTPS o en la propia aplicación.
++ Cuando algo falla, puedes investigar de abajo hacia arriba
++ Las herramientas de diagnóstico permiten localizar problemas de comunicación comprobando diferentes capas y componentes de una aplicación conectada a Internet.	
++ Lo esencial de las herramientas
+
++ `ipconfig / ip` → configuración de red local
++ `ping` → conectividad mediante **ICMP**
++ `nslookup` / dig → resolución **DNS**
++ `tracert / traceroute` → ruta hacia el destino
++ `netstat / ss` → conexiones y puertos
++ `curl` → pruebas **HTTP/HTTPS** desde terminal
++ `DevTools` → inspección de **requests, responses, headers, CORS, tiempos y recursos del navegador**
++ `Postman` → pruebas y exploración de _**APIs**_
++ `Wireshark` → captura y análisis de paquetes
+
+</details>
