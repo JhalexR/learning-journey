@@ -646,8 +646,8 @@ D(("API"))
 A --> C --> D
 
 style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
-style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
-style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc26;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc26;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e700fc;
 ```
 
 + `POST http://api.ejemplo.com/login`  ❌
