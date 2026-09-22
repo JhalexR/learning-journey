@@ -3,6 +3,8 @@
 <details>
 <summary>expandir</summary>
 
+##### Investigué sobre:
+
 + Debugging y Resolución de Problemas → Mentalidad de Debugging 
 + Debugging y Resolución de Problemas → Cómo Leer Mensajes de Error 
 + Debugging y Resolución de Problemas → Técnicas de Debugging 
@@ -13,6 +15,8 @@
 
 #### 28/07/2026
 
+##### Investigué sobre:
+
 <details>
 <summary>expandir</summary>
 
@@ -22,6 +26,8 @@
 </details>
 
 #### 29/07/2026
+
+##### Investigué sobre:
 
 <details>
 <summary>expandir</summary>
@@ -35,6 +41,8 @@
 
 #### 30/07/2026
 
+##### Investigué sobre:
+
 <details>
 <summary>expandir</summary>
 
@@ -46,6 +54,8 @@
 </details>
 
 #### 31/07/2026
+
+##### Investigué sobre:
 
 <details>
 <summary>expandir</summary>
