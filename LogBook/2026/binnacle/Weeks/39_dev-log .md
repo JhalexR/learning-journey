@@ -33,3 +33,15 @@
 + Herramientas de Diagnóstico
 
 </details>
+
+<details>
+<summary>expand</summary>
+
+#### 22/09/2026
+
+##### Investigue sobre
+
++ HTTPS Y seguridad
++ Herramientas de Diagnóstico de una red
+
+</details>
