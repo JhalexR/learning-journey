@@ -1,7 +1,7 @@
-
-</details>
-
 #### 20/09/2026
+
+<details>
+<summary>expandir</summary>
 
 ##### Hoy aprendí
 
@@ -52,10 +52,10 @@
 
 </details>
 
-
-</details>
-
 #### 21/09/2026
+
+<details>
+<summary>expandir</summary>
 
 ##### Hoy aprendí
 
