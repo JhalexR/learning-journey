@@ -1,7 +1,7 @@
+#### 20/09/2026
+
 <details>
 <summary>expand</summary>
-
-#### 20/09/2026
 
 ##### Investigue sobre
 
@@ -16,10 +16,10 @@
 
 </details>
 
+#### 21/09/2026
+
 <details>
 <summary>expand</summary>
-
-#### 21/09/2026
 
 ##### Investigue sobre
 
