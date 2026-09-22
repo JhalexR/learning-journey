@@ -41,10 +41,10 @@
 
 #### 30/07/2026
 
-##### Investigué sobre:
-
 <details>
 <summary>expandir</summary>
+
+##### Investigué sobre:
 
 + Cómo Funciona Internet → básico
 + Redes Básicas → Protocolos de la Capa de Transporte 
@@ -55,10 +55,10 @@
 
 #### 31/07/2026
 
-##### Investigué sobre:
-
 <details>
 <summary>expandir</summary>
+
+##### Investigué sobre:
 
 + Arquitectura de redes -> topología de redes
 + Arquitectura de redes -> **LAN** y **WAN**
