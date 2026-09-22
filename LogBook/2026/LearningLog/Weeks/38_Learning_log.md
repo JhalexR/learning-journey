@@ -1,7 +1,6 @@
-
-</details>
-
 #### 17/09/2026
+
+<details>
 
 ##### Hoy aprendí
 

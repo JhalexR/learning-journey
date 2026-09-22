@@ -35,6 +35,9 @@
 
 #### 02/09/2026
 
+<details>
+<summary>expandir</summary>
+
 ##### Hoy aprendí
 
 ### Un ejercicio de pensamiento de ingeniería de software
@@ -50,6 +53,8 @@
 </details>
 
 #### 03/09/2026
+<details>
+<summary>expandir</summary>
 
 ##### Hoy aprendí
 
