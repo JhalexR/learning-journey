@@ -1,8 +1,7 @@
+#### 17/09/2026
 
 <details>
 <summary>expandir</summary>
-
-#### 17/09/2026
 
 ##### Investigue sobre
 
