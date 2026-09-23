@@ -1,6 +1,6 @@
 ## Herramientas de Diagnóstico
 
-1. ¿Qué significa "diagnosticar" una red?
+### 1. ¿Qué significa "diagnosticar" una red?
 
 Supongamos que intentas entrar a:
 
