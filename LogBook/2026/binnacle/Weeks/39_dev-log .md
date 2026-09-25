@@ -45,3 +45,12 @@
 + Herramientas de Diagnóstico de una red
 
 </details>
+
+#### 24/09/2026
+
+<details>
+<summary>expand</summary>
+
++ Testing y Calidad del Código — Conceptos complementarios
+
+</details>
