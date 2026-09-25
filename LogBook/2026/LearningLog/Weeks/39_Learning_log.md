@@ -291,3 +291,24 @@ HTTPS
 + `Wireshark` → captura y análisis de paquetes
 
 </details>
+
+#### 24/09/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+### Testing y Calidad del Código — Conceptos complementarios
+
++ Prueba caja negra y prueba de caja blanca -> Las dos técnicas son complementarias.
++ Los tests unitarios, de integración y E2E son ejemplos de pruebas dinámicas.
++ La automatización permite repetir pruebas rápidamente y es especialmente importante para las pruebas de regresión.
++ Cada vez que se modifica una parte importante del sistema, conviene volver a ejecutar las pruebas relevantes.
++ Pruebas de Rendimiento -> permite conocer cómo cambia el rendimiento a medida que aumenta la carga.
++ Pruebas de Compatibilidad -> su objetivo es identificar problemas producidos por diferencias entre plataformas o componentes.
++ Una documentación incorrecta puede provocar errores incluso cuando el software funciona correctamente.
++ La trazabilidad facilita el control del proyecto y permite demostrar que los requisitos importantes fueron verificados.
++ Las métricas deben utilizarse para apoyar decisiones, no simplemente para producir números.
+
+</details>
