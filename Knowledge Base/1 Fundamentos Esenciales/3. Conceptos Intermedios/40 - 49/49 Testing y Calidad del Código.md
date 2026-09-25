@@ -414,10 +414,10 @@ Las pruebas de caja blanca analizan la estructura interna del software.
 
 El responsable de la prueba conoce:
 
-+ el código;
-+ las condiciones;
-+ los caminos de ejecución;
-+ las decisiones internas.
++ el código
++ las condiciones
++ los caminos de ejecución
++ las decisiones internas
 
 El objetivo puede ser comprobar diferentes rutas que puede seguir el programa.
 
@@ -457,11 +457,11 @@ Se realizan sin ejecutar el programa.
 
 Pueden incluir:
 
-+ revisión del código;
-+ inspección de documentos;
-+ revisión de requisitos;
-+ análisis estático;
-+ pruebas de escritorio.
++ revisión del código
++ inspección de documentos
++ revisión de requisitos
++ análisis estático
++ pruebas de escritorio
 
 Ejemplo:
 
@@ -515,7 +515,7 @@ Una persona ejecuta los casos de prueba.
 
 Por ejemplo:
 
-
+```
 1. Abrir aplicación
     |
     |_ 2. Introducir usuario
@@ -525,7 +525,7 @@ Por ejemplo:
             |_ 4. Presionar "Iniciar sesión"
                 |
                 |_ 5. Comprobar resultado
-
+```
 
 **Son útiles especialmente para pruebas exploratorias, de usabilidad y escenarios donde la evaluación humana es importante.**
 
@@ -593,9 +593,9 @@ Las pruebas de regresión permiten detectar este tipo de situaciones.
 
 **Relación con el desarrollo**
 
-Cada vez que se modifica una parte importante del sistema, conviene volver a ejecutar las pruebas relevantes.
++ Cada vez que se modifica una parte importante del sistema, conviene volver a ejecutar las pruebas relevantes.
 
-Por eso la automatización resulta especialmente útil.
++ Por eso la automatización resulta especialmente útil.
 
 ### 5. Pruebas según su objetivo
 
@@ -607,11 +607,11 @@ Evalúan si el usuario puede comprender y utilizar correctamente el sistema.
 
 Pueden analizar:
 
-+ facilidad de navegación;
-+ claridad de los mensajes;
-+ organización de las pantallas;
-+ consistencia de la interfaz;
-+ facilidad para completar tareas.
++ facilidad de navegación
++ claridad de los mensajes
++ organización de las pantallas
++ consistencia de la interfaz
++ facilidad para completar tareas
 
 Ejemplo:
 
@@ -642,21 +642,23 @@ Evalúan cómo se comporta el sistema utilizando diferentes niveles de carga.
 
 Algunas métricas importantes son:
 
-+ tiempo de respuesta;
-+ consumo de memoria;
-+ uso de CPU;
-+ utilización de red;
-+ número de transacciones;
-+ usuarios simultáneos;
-+ operaciones de entrada/salida.
++ tiempo de respuesta
++ consumo de memoria
++ uso de CPU
++ utilización de red
++ número de transacciones
++ usuarios simultáneos
++ operaciones de entrada/salida
 
 Por ejemplo:
 
+```
 `100 usuarios → 200 ms`
     |
     |_ `500 usuarios → 450 ms`
         |
         |_ `1000 usuarios → 1.2 s`
+```
 
 **Esto permite conocer cómo cambia el rendimiento a medida que aumenta la carga.**
 
@@ -666,16 +668,14 @@ Comprueban cómo se comporta el sistema cuando trabaja con grandes cantidades de
 
 Ejemplos:
 
-+ millones de registros;
-+ grandes cantidades de archivos;
-+ colas extensas;
-+ grandes cantidades de transacciones.
++ millones de registros
++ grandes cantidades de archivos
++ colas extensas
++ grandes cantidades de transacciones
 
 La preocupación principal es comprobar que el sistema pueda manejar correctamente el volumen esperado.
 
 #### 5.2.2 Pruebas de Estrés
-
-5.2.2 Pruebas de Estrés
 
 Llevan el sistema más allá de los límites previstos para observar cómo responde ante una sobrecarga.
 
@@ -693,21 +693,21 @@ Prueba de estrés:
 
 Se busca descubrir:
 
-+ puntos de fallo;
-+ límites del sistema;
-+ problemas de recuperación;
-+ pérdida de integridad;
-+ degradación del servicio.
++ puntos de fallo
++ límites del sistema
++ problemas de recuperación
++ pérdida de integridad
++ degradación del servicio
 
 ### 5.3 Pruebas de Seguridad
 
 Evalúan si el sistema protege correctamente:
 
-+ información;
-+ usuarios;
-+ permisos;
-+ autenticación;
-+ operaciones críticas.
++ información
++ usuarios
++ permisos
++ autenticación
++ operaciones críticas
 
 Algunos aspectos que pueden comprobarse:
 
@@ -725,16 +725,17 @@ Comprueban que el software funcione correctamente junto con otros componentes de
 
 Pueden involucrar:
 
-+ sistemas operativos;
-+ navegadores;
-+ dispositivos;
-+ bases de datos;
-+ bibliotecas;
-+ otros sistemas;
-+ configuraciones diferentes.
++ sistemas operativos
++ navegadores
++ dispositivos
++ bases de datos
++ bibliotecas
++ otros sistemas
++ configuraciones diferentes
 
 Ejemplo:
 
+```
 Aplicación web
 
 Chrome ✔
@@ -744,6 +745,7 @@ Chrome ✔
         |_ Edge ✔
             |
             |_ Safari ✔
+```
 
 **El objetivo es identificar problemas producidos por diferencias entre plataformas o componentes.**
 
@@ -768,11 +770,11 @@ style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 
 Se debe verificar que:
 
-+ los datos no se pierdan;
-+ los valores sean correctos;
-+ los formatos sean compatibles;
-+ los datos históricos continúen disponibles;
-+ existan mecanismos para detectar errores.
++ los datos no se pierdan
++ los valores sean correctos
++ los formatos sean compatibles
++ los datos históricos continúen disponibles
++ existan mecanismos para detectar errores
 
 **También es importante conservar mecanismos de auditoría y recuperación cuando la migración sea crítica.**
 
@@ -801,12 +803,12 @@ style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 
 Pueden comprobar:
 
-+ copias de seguridad;
-+ restauración;
-+ recuperación de transacciones;
-+ puntos de restauración;
-+ integridad de los datos;
-+ procedimientos ante desastres.
++ copias de seguridad
++ restauración
++ recuperación de transacciones
++ puntos de restauración
++ integridad de los datos
++ procedimientos ante desastres
 
 ### 5.7 Pruebas de Instalación y Despliegue
 
@@ -849,12 +851,12 @@ La documentación también debe probarse.
 
 El objetivo es verificar que:
 
-+ los manuales sean correctos;
-+ las instrucciones funcionen;
-+ las imágenes correspondan con la aplicación;
-+ los enlaces funcionen;
-+ los mensajes descritos coincidan con los reales;
-+ los ejemplos sean válidos.
++ los manuales sean correctos
++ las instrucciones funcionen
++ las imágenes correspondan con la aplicación
++ los enlaces funcionen
++ los mensajes descritos coincidan con los reales
++ los ejemplos sean válidos
 
 Una documentación incorrecta puede provocar errores incluso cuando el software funciona correctamente.
 
@@ -910,7 +912,7 @@ style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
-style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 ```
 
 ### 7. Trazabilidad de las Pruebas
@@ -933,7 +935,7 @@ style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
-style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 ```
 
 ```mermaid
@@ -990,7 +992,7 @@ E(Corregir)
 F(Volver a probar)
 G(Cerrar defecto)
 
-A --> B --> C --> D --> E --> G
+A --> B --> C --> D --> E --> F --> G
 
 style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
@@ -1003,16 +1005,16 @@ style G fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 
 Un sistema de seguimiento puede registrar:
 
-+ identificador;
-+ descripción;
-+ pasos para reproducirlo;
-+ evidencia;
-+ responsable;
-+ estado;
-+ severidad;
-+ fecha;
-+ versión afectada;
-+ versión corregida.
++ identificador
++ descripción
++ pasos para reproducirlo
++ evidencia
++ responsable
++ estado
++ severidad
++ fecha
++ versión afectada
++ versión corregida
 
 ### 9. Severidad de los Fallos
 
@@ -1020,26 +1022,21 @@ Un sistema de seguimiento puede registrar:
 
 Puede establecerse una clasificación como:
 
-+ <span style="color: #e81026;">Crítico</span> 
-+ <span style="color: #e87c10;">Alto</span> 
-+ <span style="color: #d2e810;">Medio</span> 
-+ <span style="color: #30e810;">Bajo</span> 
-
 Por ejemplo:
 
-<span style="color: #e81026;">Crítico</span> 
+### Crítico 🔴
 
 + _El sistema no puede utilizarse o existe una pérdida grave de información._
 
-<span style="color: #e87c10;">Alto</span> 
+### Alto 🟠
 
 + _Una funcionalidad importante no funciona correctamente._
 
-<span style="color: #d2e810;">Medio</span> 
+### Medio 🟡
 
 + _Existe un problema que afecta una funcionalidad, pero existe alguna alternativa._
 
-<span style="color: #30e810;">Bajo</span> 
+### Bajo 🟢
 
 + _Problemas menores de presentación o comportamiento que no bloquean el uso._
 
@@ -1057,6 +1054,8 @@ _Casos planificados:_ `100` -> _Casos ejecutados:_ `80` -> **_Ejecución =_ 80%*
 
 **Fallos encontrados y corregidos**
 
+```
+
         Fallos encontrados: 20 
                 |
                 |
@@ -1065,6 +1064,7 @@ _Casos planificados:_ `100` -> _Casos ejecutados:_ `80` -> **_Ejecución =_ 80%*
             ____|___
            |        |
 20 encontrados    15 corregidos
+```
 
 ### Brecha de defectos
 
@@ -1084,6 +1084,7 @@ Permiten observar tendencias.
 
 Por ejemplo:
 
+```
 Semana 1 → 30 fallos
     |
     |__ Semana 2 → 20 fallos
@@ -1091,6 +1092,7 @@ Semana 1 → 30 fallos
             |__ Semana 3 → 10 fallos
                     |
                     |__ Semana 4 → 3 fallos
+```
 
 La tendencia puede aportar información sobre la evolución de la calidad y ayudar a decidir si son necesarias más pruebas.
 
@@ -1116,7 +1118,7 @@ G(Aceptación)
 H(Operación)
 I(Mantenimiento)
 
-A --> B --> C --> D --> E --> G --> H --> I
+A --> B --> C --> D --> E --> F --> G --> H --> I
 
 style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
@@ -1159,21 +1161,21 @@ style P fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 | **Plan — Planificar**        | **Do — Hacer**                 |  
 |------------------------------|--------------------------------|
 | Definir:                     | Ejecutar los casos de prueba   |
-| 		               |                                |
+| 		                       |                                |
 | ¿qué se probará;             | Casos de prueba                |
-| ¿cómo se probará?            |	↓                       |
+| ¿cómo se probará?            |	    ↓                       |
 | ¿cuándo?                     | Ejecución                      |
-| ¿quién será responsable?     |	↓                       |
+| ¿quién será responsable?     |	    ↓                       |
 | ¿qué recursos se necesitan.? | Resultados                     |
 |                              |                                |
 
 | **Check — Verificar**        | **Act — Actuar**               |
 |------------------------------|--------------------------------|
-|                              | Utilizar lo aprendido para     |
-| Analizar:                    | mejorar el siguiente ciclo     |
+| Analizar:                    | Utilizar lo aprendido para     |
+|                              | mejorar el siguiente ciclo     |
 |                              |                                |
 | resultados                   | actualizar casos de prueba     |
-| defectos;                    | automatizar pruebas            |
+| defectos                     | automatizar pruebas            |
 | métricas                     | mejorar procedimientos         |
 | cumplimiento del plan        | cambiar herramientas           |
 | calidad alcanzada            | ajustar cronogramas            |
@@ -1182,17 +1184,19 @@ style P fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
 
 Entonces comienza nuevamente:
 
+```
 PLAN → DO → CHECK → ACT
           ↑         ↓
           ←─────────
+```
 
 La idea fundamental es que el proceso de testing también debe mejorar continuamente.
 
 ### 13. Replanificación del siguiente ciclo de pruebas
 
-Después de cada ciclo no simplemente se continúa con las mismas pruebas.
+Después de cada ciclo no simplemente se continúa con las mismas pruebas. 
 
-Es necesario analizar qué cambió.
+**Es necesario analizar qué cambió.**
 
 Por ejemplo:
 
