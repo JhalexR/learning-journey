@@ -7,7 +7,7 @@
 
 ### APIs y Comunicación entre Sistemas
 
-**¿Qué es una API?
+**¿Qué es una API?**
 + Entre dos sistemas independientes; Acceder directamente a la base de datos **sería una mala arquitectura**
 + Una API funciona como un contrato de comunicación: 
 	+ La aplicación no necesita acceder directamente a la base de datos. -> En cambio, realiza una solicitud a la API
