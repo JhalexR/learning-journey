@@ -8,3 +8,13 @@
 + APIs y Comunicación entre Sistemas
 
 </details>
+
+#### 28/09/2026
+
+<details>
+<summary>expand</summary>
+
++ APIs y Comunicación entre Sistemas
+	+ Diseño práctico de una API RESTful
+
+</details>
