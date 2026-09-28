@@ -957,3 +957,1091 @@ pensamos:
                      │
                   HATEOAS
 ```
+
+## Diseño práctico de una API RESTful
+
+Vamos a imaginar durante toda esta sección que estamos diseñando una API para una tienda en línea.
+
+Tendremos recursos como:
+
+```
+/users
+/products
+/categories
+/orders
+/reviews
+```
+
+La idea es aprender a tomar decisiones de diseño que hagan que una **`API`** sea **consistente, predecible y fácil de consumir.**
+
+### 1. Diseñar primero los recursos
+
+```mermaid 
+flowchart LR
+
+
+A[El primer paso 
+no debería 
+ser pensar: ⛔]
+C["¿Qué endpoints 
+voy a crear?"]
+F[vs]
+D[Es mejor 
+comenzar 
+preguntándonos: ✔️]
+E["¿Qué recursos 
+existen en 
+mi sistema?"]
+ 
+A --> C 
+D --> E 
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e810a0;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#e810a0;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+```
+
+Por ejemplo, en nuestra tienda:
+
+```
+Usuario
+Producto
+Categoría
+Pedido
+Reseña
+```
+
+Podemos representarlos:
+
+```
+/users
+/products
+/categories
+/orders
+/reviews
+```
+
+Esto constituye el modelo de recursos de nuestra API.
+
+### 2. Nombrar recursos correctamente
+
+**Una buena práctica es utilizar sustantivos, no verbos.**
+
+❌ Menos recomendable
+
+```
+/getUsers
+/createProduct
+/deleteOrder
+/updateUser
+```
+
+✅ Más apropiado
+
+```
+/users
+/products
+/orders
+```
+
+La acción ya puede determinarse mediante el método HTTP.
+
+Por ejemplo:
+
+```
+GET    /users
+POST   /users
+
+GET    /products
+POST   /products
+
+GET    /orders
+POST   /orders
+```
+
+Esto produce una interfaz más uniforme.
+
+### 3. Colecciones y recursos individuales
+
+Normalmente diferenciamos entre:
+
+**Colección**
+
++ `/products`
+
+> _Representa el conjunto de productos._
+
+**Recurso individual**
+
++ `/products/25`
+
+Representa específicamente el producto `25`.
+
+```
+/products
+   │
+   ├── /1
+   ├── /2
+   ├── /25
+   └── /80
+```
+
+Por tanto:
+
+`GET /products` 
+
+> puede devolver una colección.
+
+Mientras:
+
+`GET /products/25`
+
+> devuelve un producto concreto.
+
+### 4. Identificadores
+
+Los recursos individuales necesitan una forma de identificarlos.
+
+Por ejemplo:
+
+```
+/products/25
+/users/10
+/orders/983
+```
+
+El identificador puede ser:
+
++ entero
++ UUID
++ cadena
++ otro identificador único
+
+Por ejemplo:
+
+`/products/25` o: `/products/550e8400-e29b-41d4-a716-446655440000`
+
+Lo importante es que el identificador sea **estable y permita distinguir el recurso.**
+
+### 5. Relaciones entre recursos
+
+Aquí empieza una parte muy importante del diseño.
+
+Supongamos que:
+
+```
+Usuario
+   │
+   └── tiene muchos pedidos
+```
+
+Podríamos representar la relación mediante:
+
+`/users/15/orders`
+
+Esto significa:
+
+> Los pedidos asociados al usuario 15.
+
+De manera similar:
+
+`/products/25/reviews`
+
+significa:
+
+> Las reseñas asociadas al producto 25.
+
+Otro ejemplo:
+
+`/orders/500/items`
+
+> representaría los elementos del pedido 500.
+
+### 6. ¿Cuándo usar recursos anidados?
+
+Los recursos anidados son útiles cuando existe una relación clara entre ellos.
+
+Por ejemplo:
+
+`/users/15/orders`
+
+tiene sentido porque estamos preguntando por:
+
+> los pedidos del usuario 15.
+
+Pero no debemos abusar de la anidación.
+
+Por ejemplo, podríamos terminar con algo excesivamente complejo:
+
+`/users/15/orders/500/items/3/reviews/8`
+
+Aunque técnicamente podría diseñarse así, resulta difícil de consumir y mantener.
+
+Una alternativa podría ser:
+
+`/orders/500/items/3` o: `/reviews/8`
+
+dependiendo del modelo de recursos.
+
+**Regla práctica**
+
+> **Usa anidamiento cuando ayude a expresar claramente una relación; evita cadenas excesivamente profundas.**
+
+### 7. No utilizar acciones en las URLs
+
+Supongamos que queremos cancelar un pedido.
+
+Una `API` podría tener:
+
+`POST /cancelOrder/500`
+
+Pero desde una perspectiva **RESTful**, normalmente conviene modelar el estado o la acción como un recurso.
+
+Por ejemplo, dependiendo del dominio:
+
+`PATCH /orders/500`
+
+con:
+
+```JSON
+{
+  "status": "cancelled"
+}
+```
+
+O, si la cancelación tiene comportamiento propio y reglas complejas, puede modelarse como una operación/recurso específico:
+
+`POST /orders/500/cancellation`
+
+Esto demuestra algo importante:
+
+> **REST no significa que absolutamente todos los endpoints deban ser sustantivos simples.**
+
+Lo importante es que el diseño represente correctamente el dominio.
+
+### 8. PUT vs. PATCH
+
+Esta es una de las decisiones prácticas más importantes.
+
+### PUT
+
+Generalmente se utiliza para **reemplazar la representación de un recurso.**
+
+Por ejemplo:
+
+`PUT /users/25`
+
+```JSON
+{
+  "name": "Juan",
+  "email": "juan@example.com",
+  "active": true
+}
+```
+
+Conceptualmente:
+
+```
+Estado anterior
+      ↓
+  reemplazo
+      ↓
+Nuevo estado
+``` 
+
+### 9. PATCH
+
+`PATCH` se utiliza para realizar una modificación parcial.
+
+Por ejemplo:
+
+`PATCH /users/25`
+
+```JSON
+{
+  "active": false
+}
+```
+
+No estamos diciendo:
+
+> "Aquí está el usuario completo."
+
+Estamos diciendo:
+
+> "Modifica esta parte del usuario."
+
+Por tanto:
+
+```mermaid 
+flowchart 
+
+
+A[PUT]
+C[reemplazo]
+B[VS]
+D[PATCH]
+E[modificación parcial]
+ 
+A --> C 
+D --> E 
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#10e8dd;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#10e8dd;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+style E fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+```
+
+### 10. Ejemplo PUT vs. PATCH
+
+Supongamos:
+
+```JSON
+{
+  "id": 25,
+  "name": "Juan",
+  "email": "juan@example.com",
+  "active": true
+}
+```
+
+Queremos solamente cambiar:
+
+`active: false`
+
+Con **`PATCH`**:
+
+`PATCH /users/25`
+
+```JSON
+{
+  "active": false
+}
+```
+
+**Es una modificación parcial.**
+
+Con **`PUT`**, dependiendo del contrato de la **API**, normalmente enviaríamos la **representación completa que queremos establecer:**
+
+`PUT /users/25`
+
+```JSON
+{
+  "name": "Juan",
+  "email": "juan@example.com",
+  "active": false
+}
+```
+
+### 11. POST vs. PUT
+
+Otra confusión frecuente.
+
+### POST
+
+Normalmente se utiliza para crear un nuevo recurso dentro de una colección:
+
+`POST /products`
+
+El servidor puede generar el identificador:
+
+```JSON
+{
+  "name": "Laptop",
+  "price": 2500000
+}
+```
+
+y responder con:
+
+```JSON
+{
+  "id": 100,
+  "name": "Laptop",
+  "price": 2500000
+}
+```
+
+### PUT
+
+Puede utilizarse cuando el cliente conoce la URI del recurso que quiere crear o reemplazar:
+
+`PUT /products/100`
+
+```JSON
+{
+  "name": "Laptop",
+  "price": 2500000
+}
+```
+
+La diferencia conceptual es importante:
+
+```mermaid 
+flowchart 
+
+
+A["POST /products"]
+C[""crea algo 
+dentro de 
+esta colección""]
+E[VS]
+B["PUT /products/100"]
+D["establece/reemplaza 
+el recurso 
+identificado 
+por 100"]
+
+ 
+A --> C 
+B --> D 
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#10e8dd;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#10e8dd;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+```
+
+### 12. Diseñar consultas: filtros
+
+Supongamos que tenemos miles de productos.
+
+No queremos descargar todos.
+
+Podemos utilizar parámetros de consulta:
+
+`GET /products?category=computers`
+
+O:
+
+`GET /products?minPrice=1000000&maxPrice=3000000`
+
+Esto permite expresar:
+
+> Dame los productos que cumplen determinadas condiciones.
+
+### 13. Búsqueda
+
+Podemos utilizar un parámetro como:
+
+`GET /products?search=laptop` O `GET /products?q=laptop`
+
+Lo importante no es tanto el nombre exacto del parámetro como que la API tenga una convención consistente y documentada.
+
+Por ejemplo:
+
+```
+GET /products?search=laptop
+GET /products?search=keyboard
+GET /products?search=monitor
+```
+
+### 14. Ordenamiento
+
+También podemos permitir ordenar resultados:
+
+`GET /products?sort=price` o: `GET /products?sort=-price`
+
+donde el signo `-` podría representar orden descendente.
+
+Otra posibilidad:
+
+`GET /products?sort=price&order=desc`
+
+No existe una única sintaxis universal.
+
+La regla importante es:
+
+> **elige una convención y úsala consistentemente en toda la API.**
+
+### 15. Paginación
+
+La paginación es fundamental cuando una colección puede tener muchos elementos.
+
+Imaginemos:
+
+`/products`
+
+y tenemos:
+
+`1.000.000 productos`
+
+Sería absurdo devolverlos todos en una sola respuesta.
+
+Podemos utilizar:
+
+`GET /products?page=1&limit=20`
+
+Esto significa:
+
+> Dame la primera página con 20 productos.
+
+Después:
+
+`GET /products?page=2&limit=20`
+
+### 16. Offset y limit
+
+Otra estrategia común:
+
+`GET /products?offset=20&limit=20`
+
+Conceptualmente:
+
+```
+Productos
+
+0 ───────── 19     página 1
+20 ──────── 39     página 2
+40 ──────── 59     página 3
+```
+
+Es sencilla y útil, aunque tiene algunas limitaciones cuando los datos cambian frecuentemente.
+
+### 17. Cursor pagination
+
+En sistemas grandes también es frecuente utilizar **cursor pagination.**
+
+En lugar de decir:
+
+`page=2`
+
+la **API** devuelve un cursor:
+
+```JSON
+{
+  "data": [
+    ...
+  ],
+  "nextCursor": "eyJpZCI6MjB9"
+}
+```
+
+El cliente utiliza ese cursor:
+
+`GET /products?cursor=eyJpZCI6MjB9`
+
+Esto puede ser más eficiente para determinados conjuntos de datos grandes o dinámicos.
+
+No necesitas memorizar todavía todos los detalles de implementación; lo importante es reconocer:
+
+```
+Offset pagination
+        vs.
+Cursor pagination
+```
+
+### 18. Una respuesta paginada
+
+Una API podría devolver:
+
+```JSON
+{
+  "data": [
+    {
+      "id": 1,
+      "name": "Laptop"
+    },
+    {
+      "id": 2,
+      "name": "Monitor"
+    }
+  ],
+  "pagination": {
+    "page": 1,
+    "limit": 2,
+    "total": 150,
+    "totalPages": 75
+  }
+}
+```
+
+La estructura exacta depende del diseño de la API.
+
+Lo importante es que el consumidor pueda comprender:
+
++ ¿Qué datos recibió?
++ ¿cuántos resultados hay?
++ ¿Dónde está dentro de la colección?
++ ¿Cómo obtener más resultados?
+
+### 19. Códigos de estado coherentes
+
+**Creación exitosa**
+
+```
+POST /products
+        ↓
+201 Created
+```
+
+**Consulta exitosa**
+
+```
+GET /products/25
+        ↓
+200 OK
+```
+
+**Recurso inexistente**
+
+```
+GET /products/999999
+        ↓
+404 Not Found
+```
+
+**Solicitud inválida**
+
+```
+POST /products
+        ↓
+400 Bad Request
+```
+
+**No autenticado**
+
+```
+GET /profile
+        ↓
+401 Unauthorized
+```
+
+**Autenticado pero sin permisos**
+
+```
+DELETE /users/25
+        ↓
+403 Forbidden
+```
+
+La elección coherente de códigos facilita mucho el trabajo del consumidor.
+
+### 20. Diseñar errores de forma consistente
+
+Una **API** no debería devolver errores completamente diferentes en cada endpoint.
+
+**❌ Poco consistente**
+
+```JSON
+{
+  "error": "Something went wrong"
+}
+```
+
+Otro endpoint:
+
+```JSON
+{
+  "message": "Invalid user"
+}
+```
+
+Y otro:
+
+```JSON
+{
+  "problem": "Product doesn't exist"
+}
+```
+
+Esto dificulta el desarrollo del cliente.
+
+Es mejor establecer una estructura común.
+
+Por ejemplo:
+
+```JSON
+{
+  "error": {
+    "code": "PRODUCT_NOT_FOUND",
+    "message": "The requested product does not exist."
+  }
+}
+```
+
+Otro error:
+
+```JSON
+{
+  "error": {
+    "code": "INVALID_EMAIL",
+    "message": "The email address is invalid."
+  }
+}
+```
+
+El consumidor puede programar contra una estructura predecible.
+
+### 21. Errores de validación
+
+Supongamos que creamos un usuario:
+
+`POST /users`
+
+y enviamos:
+
+```JSON
+{
+  "name": "",
+  "email": "correo-no-valido"
+}
+```
+
+La API puede devolver información específica:
+
+```JSON
+{
+  "error": {
+    "code": "VALIDATION_ERROR",
+    "message": "The request contains invalid fields.",
+    "fields": {
+      "name": "Name is required.",
+      "email": "Email must be valid."
+    }
+  }
+}
+```
+
+Esto es mucho más útil para el frontend.
+
+### 22. Versionado de una API
+
+Las APIs evolucionan.
+
+Imaginemos que tenemos:
+
+`/api/v1/products`
+
+Posteriormente hacemos cambios incompatibles.
+
+Podemos introducir:
+
+`/api/v2/products`
+
+De esta forma:
+
+```mermaid 
+flowchart 
+
+
+A["Clientes antiguos"]
+C["API v1"]
+E[VS]
+B["Clientes nuevos"]
+D["API v2"]
+
+ 
+A --> C 
+B --> D 
+
+style A fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#10e8dd;
+style C fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#10e8dd;
+style B fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+style D fill:#07284d,stroke:#0d2847,stroke-width:1px,color:#00fc0d;
+```
+
+Otra estrategia consiste en versionar mediante headers u otros mecanismos.
+
+No existe una única forma universal.
+
+Lo importante es tener una estrategia clara para gestionar breaking changes.
+
+### 23. ¿Qué es un breaking change?
+
+Es un cambio que puede hacer que un consumidor existente deje de funcionar correctamente.
+
+Por ejemplo, originalmente:
+
+```JSON
+{
+  "name": "Juan"
+}
+```
+y posteriormente cambiamos:
+
+```JSON
+{
+  "fullName": "Juan Pérez"
+}
+```
+
+Un frontend que espera:
+
+`response.name`
+
+puede dejar de funcionar.
+
+Por eso las **APIs** públicas deben evolucionar cuidadosamente.
+
+### 24. Consistencia de nombres
+
+Una API debería establecer convenciones.
+
+Por ejemplo:
+
+```
+/users
+/products
+/orders
+```
+
+y no:
+
+```
+/users
+/product
+/order-list
+```
+
+Si decidimos utilizar plural:
+
+```
+/users
+/products
+/orders
+```
+
+lo ideal es mantener esa convención.
+
+También debemos decidir cuestiones como:
+
+```
+camelCase
+snake_case
+```
+
+Por ejemplo:
+
+```JSON
+{
+  "firstName": "Juan",
+  "createdAt": "..."
+}
+```
+
+o:
+
+```JSON
+{
+  "first_name": "Juan",
+  "created_at": "..."
+}
+```
+
+Ambas son posibles.
+
+Lo importante es:
+
+> **consistencia.**
+
+### 25. Evitar respuestas innecesariamente grandes
+
+Supongamos que:
+
+`GET /users/25`
+
+devuelve:
+
+```JSON
+{
+  "id": 25,
+  "name": "Juan",
+  "email": "juan@example.com",
+  "address": "...",
+  "phone": "...",
+  "orders": [...],
+  "payments": [...],
+  "reviews": [...],
+  "internalMetadata": {...}
+}
+```
+
+Puede ser demasiado.
+
+Una API bien diseñada debería intentar devolver la información necesaria para el caso de uso.
+
+En sistemas más complejos puede ser necesario introducir mecanismos como:
+
+`?fields=id,name,email`
+
+o endpoints especializados, dependiendo del diseño.
+
+Esto también conecta posteriormente con GraphQL, donde el cliente puede especificar explícitamente qué campos quiere.
+
+### 26. Documentación
+
+Una API sin documentación es difícil de consumir.
+
+La documentación debería explicar como mínimo:
+
+```
+Endpoint
+Método
+Parámetros
+Headers
+Request body
+Response
+Errores
+Autenticación
+Ejemplos
+```
+
+Por ejemplo:
+
+```
+GET /products/{id}
+
+Descripción:
+Obtiene un producto específico.
+
+Parámetros:
+id → identificador del producto
+
+Respuesta:
+200 → producto encontrado
+404 → producto inexistente
+```
+
+Una herramienta muy importante en este ámbito es **OpenAPI**, que permite describir **APIs** de forma estructurada.
+
+Más adelante podremos dedicar una lección específica a **OpenAPI/Swagger**.
+
+### 27. Ejemplo de diseño completo
+
+Supongamos que vamos a construir una API para nuestra tienda.
+
+**Recursos**
+
+```
+/users
+/products
+/categories
+/orders
+/reviews
+```
+
+**Productos**
+
+```
+GET    /products
+GET    /products/{id}
+POST   /products
+PUT    /products/{id}
+PATCH  /products/{id}
+DELETE /products/{id}
+```
+
+**Filtros**
+
+```
+GET /products?category=computers
+GET /products?minPrice=1000000
+GET /products?search=laptop
+```
+
+**Ordenamiento**
+
+`GET /products?sort=price`
+
+**Paginación**
+
+`GET /products?page=2&limit=20`
+
+**Reseñas de un producto**
+
+`GET /products/25/reviews`
+
+**Crear reseña**
+
+`POST /products/25/reviews`
+
+Esto ya empieza a parecerse a una API real.
+
+### 28. Arquitectura resultante
+
+Podemos visualizar nuestro diseño:
+
+```
+   API REST
+                            │
+        ┌───────────────────┼───────────────────┐
+        │                   │                   │
+      Users              Products             Orders
+        │                   │                   │
+     /users             /products            /orders
+        │                   │                   │
+        │            ┌──────┴──────┐            │
+        │            │             │            │
+        │        /products/25   /products?      │
+        │                         filters       │
+        │
+        └───────────────────────────────────────┐
+                                                │
+                                           Base de datos
+```
+
+### 29. Checklist para diseñar una API RESTful
+
+Cuando diseñes una API, puedes hacerte estas preguntas:
+
+**Recursos**
+
+¿Cuáles son las entidades principales?
+¿Están claramente identificadas?
+¿Estoy utilizando sustantivos?
+
+**URLs**
++ ¿Las rutas son consistentes?
++ ¿Distinguen colecciones y recursos individuales?
++ ¿Las relaciones están representadas de forma clara?
++ ¿Estoy evitando anidamientos innecesarios?
+
+**Métodos**
++ ¿Estoy utilizando correctamente GET, POST, PUT, PATCH y DELETE?
++ ¿Estoy considerando la idempotencia?
+
+**Consultas**
++ ¿Tengo filtros?
++ ¿Búsqueda?
++ ¿Ordenamiento?
++ ¿Paginación?
+
+**Respuestas**
++ ¿Las estructuras son consistentes?
++ ¿Los códigos HTTP representan correctamente el resultado?
++ ¿Los errores tienen un formato uniforme?
+
+**Evolución**
++ ¿Cómo manejaré breaking changes?
++ ¿Tengo una estrategia de versionado?
+
+**Documentación**
++ ¿Otro desarrollador podría utilizar mi API sin preguntarme cómo funciona?
+
+### 30. Una regla mental muy útil
+
+Cuando estés diseñando una API REST, piensa en este orden:
+
+```
+1. ¿Qué recursos tengo?
+                     ↓
+          2. ¿Cómo los identifico?
+                     ↓
+          3. ¿Cómo se relacionan?
+                     ↓
+          4. ¿Qué operaciones necesito?
+                     ↓
+          5. ¿Qué datos recibe/devuelve?
+                     ↓
+          6. ¿Cómo filtro y pagino?
+                     ↓
+          7. ¿Cómo manejo errores?
+                     ↓
+          8. ¿Cómo evolucionará la API?
+                     ↓
+          9. ¿Cómo la documento?
+```
+
+Esto evita caer en el error de comenzar simplemente inventando URLs.
