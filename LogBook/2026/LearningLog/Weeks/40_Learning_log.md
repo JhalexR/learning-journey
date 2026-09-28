@@ -71,3 +71,106 @@ API RESTful
 └── HATEOAS
 ```
 </details>
+
+
+#### 28/09/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+### Diseño práctico de una API RESTful
+
++ Diseñar primero los recursos
++ Nombrar recursos correctamente
+	+ **Una buena práctica es utilizar sustantivos, no verbos.**
++ No utilizar acciones en las URLs
++ breaking change -> Es un cambio que puede hacer que un consumidor existente deje de funcionar correctamente.
++ Checklist para diseñar una API RESTful
+**Recursos**
+
+¿Cuáles son las entidades principales?
+¿Están claramente identificadas?
+¿Estoy utilizando sustantivos?
+
+**URLs**
++ ¿Las rutas son consistentes?
++ ¿Distinguen colecciones y recursos individuales?
++ ¿Las relaciones están representadas de forma clara?
++ ¿Estoy evitando anidamientos innecesarios?
+
+**Métodos**
++ ¿Estoy utilizando correctamente GET, POST, PUT, PATCH y DELETE?
++ ¿Estoy considerando la idempotencia?
+
+**Consultas**
++ ¿Tengo filtros?
++ ¿Búsqueda?
++ ¿Ordenamiento?
++ ¿Paginación?
+
+**Respuestas**
++ ¿Las estructuras son consistentes?
++ ¿Los códigos HTTP representan correctamente el resultado?
++ ¿Los errores tienen un formato uniforme?
+
+**Evolución**
++ ¿Cómo manejaré breaking changes?
++ ¿Tengo una estrategia de versionado?
+
+**Documentación**
++ ¿Otro desarrollador podría utilizar mi API sin preguntarme cómo funciona?
+
++ Cuando estés diseñando una API REST, piensa en este orden:
+
+```
+          1. ¿Qué recursos tengo?
+                     ↓
+          2. ¿Cómo los identifico?
+                     ↓
+          3. ¿Cómo se relacionan?
+                     ↓
+          4. ¿Qué operaciones necesito?
+                     ↓
+          5. ¿Qué datos recibe/devuelve?
+                     ↓
+          6. ¿Cómo filtro y pagino?
+                     ↓
+          7. ¿Cómo manejo errores?
+                     ↓
+          8. ¿Cómo evolucionará la API?
+                     ↓
+          9. ¿Cómo la documento?
+```
+
+**GraphQL**
++ Es un lenguaje de consulta para **APIs** y también una especificación para ejecutar esas consultas sobre los datos de un servidor.
++ La idea fundamental de **GraphQL** es diferente a la de una **API REST** tra+dicional:
+	+ **En GraphQL, el cliente puede especificar exactamente qué datos necesita.**
++ `GraphQL` y `REST` son **formas diferentes de diseñar APIs.**
++ **Over-fetching** -> Significa recibir más información de la que realmente necesitas.
++ **Under-fetching** -> Significa lo opuesto a **Over-fetching**
++ **GraphQL** intenta solucionar es el **over-fetching.**
+
+####conceptos que maneja **GraphQL** 
++ **GraphQL** maneja el concepto de **Schema** -> significa: qué datos y operaciones están disponibles en la **API** y qué tipos tienen.
++ **GraphQL** utiliza un **sistema de tipos** -> y es fuertemente tipado
++ **GraphQL** es adecuado para representar **datos relacionados**.
++ maneja **Objetos**
++ maneja **Queries** -> consultas
++ maneja **Mutations** -> modifica datos 
++ maneja **Subscriptions** -> Su objetivo es permitir recibir actualizaciones cuando ocurre determinado evento.
++ **El concepto de resolver** -> Un resolver es la lógica que determina cómo obtener el valor de un campo solicitado.
++ **GraphQL** puede combinar múltiples fuentes -> puede coordinar la obtención de información desde diferentes puntos 
+	+ Esto resulta especialmente interesante en arquitecturas con múltiples servicios.
++ muchas **APIs GraphQL** utilizan `un endpoint principal para las consultas`
+	+ El endpoint puede ser el mismo, pero la consulta cambia.
++ **selección explícita de campos** -> La consulta puede navegar por las relaciones definidas en el schema.
++ **Variables** -> Las consultas no tienen que contener valores directamente.
++ **Validación antes de ejecutar** -> Gracias al schema y al sistema de tipos, una consulta puede validarse.
++ **GraphQL** tiene un modelo de **errores parciales**.
+
+### GraphQL y REST no son mutuamente excluyentes
+
+</details>
