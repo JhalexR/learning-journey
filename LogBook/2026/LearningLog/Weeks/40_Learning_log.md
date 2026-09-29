@@ -174,3 +174,126 @@ API RESTful
 ### GraphQL y REST no son mutuamente excluyentes
 
 </details>
+
+#### 29/09/2026
+
+<details>
+<summary>expandir</summary>
+
+##### Hoy aprendí
+
+### gRPC
++ **gRPC** es un framework de comunicación entre sistemas desarrollado originalmente por Google.
++ Para entender **gRPC** primero hay que entender **RPC**. **Remote Procedure Call** significa: > **Llamada a Procedimiento Remoto.**
++ **gRPC** está orientado a servicios
++ **gRPC** normalmente se define primero un contrato.
++ **Protobuf** es un mecanismo de **serialización de datos estructurados** desarrollado por Google.
++ **Protobuf** utiliza una representación binaria.
++ El archivo `.proto`Puede contener: Mensajes, Servicios, Métodos, Tipos, Enumeraciones
++ A partir del contrato `.proto`, las herramientas de **gRPC** pueden generar código para diferentes lenguajes.
+	+ diferentes lenguajes pueden comunicarse utilizando el mismo contrato `.proto`
++ Un `stub` es código generado que permite al cliente comunicarse con el servicio remoto sin tener que construir manualmente toda la lógica de comunicación
++ **gRPC** está diseñado para utilizar principalmente `HTTP/2` como transporte.
++ **Tipos de RPC en gRPC**
+
+| **Tipo**                 | **Cliente**          |**Servidor**          |
+| -------------------------|----------------------|----------------------|
+| Unary                    | 1 solicitud	  |1 respuesta           |
+| Server streaming 	   | 1 solicitud	  |múltiples respuestas  |
+| Client streaming  	   | múltiples solicitudes|1 respuesta           |
+| Bidirectional streaming  | múltiples     	  |múltiples             |
+
++ Una de las principales diferencias de **gRPC** frente a **APIs REST** _tradicionales_ es el énfasis en el **contrato**.
+
+```
+REST
+│
+├── suele utilizar JSON
+└── puede utilizar otros formatos
+
+gRPC
+│
+├── suele utilizar Protobuf
+└── está diseñado alrededor de contratos y serialización eficiente
+```
+
++ **gRPC vs REST**
+
+| Característica       | REST                                  | gRPC                                 |
+| -------------------- | ------------------------------------- | ------------------------------------ |
+| Modelo               | Recursos                              | Servicios/procedimientos             |
+| Interfaz             | Endpoints                             | Métodos RPC                          |
+| Contrato             | Puede ser externo/opcional            | `.proto` es central                  |
+| Formato común        | JSON                                  | Protobuf                             |
+| Transporte habitual  | HTTP                                  | HTTP/2                               |
+| Tipado               | Depende de la implementación          | Fuertemente tipado                   |
+| Streaming            | Posible, pero no es el modelo central | Característica fundamental           |
+| Generación de código | Opcional                              | Muy integrada                        |
+| Lectura humana       | JSON facilita inspección              | Protobuf binario es menos legible    |
+| Comunicación interna | Posible                               | Muy habitual                         |
+| Navegador            | Muy natural                           | Requiere consideraciones adicionales |
+
+
++ **gRPC vs GraphQL**
+
+| Característica           | REST         | GraphQL           | gRPC                               |
+| ------------------------ | ------------ | ----------------- | ---------------------------------- |
+| Idea principal           | Recursos     | Consulta de datos | Llamadas a servicios               |
+| Modelo                   | Recursos     | Grafo             | Servicios/métodos                  |
+| Cliente determina campos | Limitado     | Sí                | Generalmente definido por mensajes |
+| Schema                   | No inherente | Fundamental       | Fundamental                        |
+| Tipado                   | Variable     | Fuerte            | Fuerte                             |
+| Formato común            | JSON         | JSON              | Protobuf                           |
+| Streaming                | No central   | Subscriptions     | Central                            |
+| Generación de código     | Variable     | Variable          | Muy común                          |
+| Transporte habitual      | HTTP         | HTTP              | HTTP/2                             |
+
+
++ **REST, GraphQL y gRPC: tres formas de pensar**
+
+```
+REST
+│
+└── "¿Qué RECURSO quiero?"
+
+GraphQL
+│
+└── "¿Qué DATOS quiero?"
+
+gRPC
+│
+└── "¿Qué OPERACIÓN/SERVICIO quiero ejecutar?"
+```
++ Los navegadores no consumen **gRPC** tradicional de la misma forma que una **API REST HTTP/JSON**. Para escenarios web existen tecnologías como **gRPC-Web**.
+
++ Mapa mental de gRPC
+
+```
+                           gRPC
+                             │
+              ┌──────────────┼──────────────┐
+              │              │              │
+             RPC          Protobuf        HTTP/2
+              │              │              │
+        ┌─────┴─────┐        │         Multiplexación
+        │           │        │         Streaming
+     Cliente      Servidor   │
+        │           │        │
+      Stub       Servicio    │
+                    │        │
+                 Métodos     │
+                    │        │
+             ┌──────┼──────┐ │
+             │      │      │ │
+           Unary  Streaming  │
+                    │        │
+              ┌─────┴─────┐  │
+              │           │  │
+            Server      Client 
+            Stream      Stream 
+                    │          
+              Bidirectional    
+```
+
+
+</details>
